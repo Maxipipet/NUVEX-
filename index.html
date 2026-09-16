@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NUVEX | Marketplace de Servicios Profesional</title>
+    <title>NUVEX | Marketplace de Servicios Pro v3.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -15,9 +15,9 @@
 </head>
 <body class="h-screen flex flex-col overflow-hidden">
 
-    <!-- BARRA SUPERIOR RESPONSIVA -->
-    <header class="bg-[#202124] text-white h-16 sm:h-20 border-b-2 border-[#35D07F] flex items-center justify-between px-4 sm:px-6 shrink-0 z-50 shadow-md">
-        <div class="flex items-center gap-3">
+    <!-- BARRA SUPERIOR PRO -->
+    <header class="bg-[#202124] text-white h-16 sm:h-20 border-b-2 border-[#35D07F] flex items-center justify-between px-4 sm:px-6 shrink-0 z-50 shadow-lg">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="cambiarVista('home')">
             <img src="logo.jpeg" alt="NUVEX" class="h-10 sm:h-12 mix-blend-multiply object-contain rounded-lg">
             <div class="hidden md:block">
                 <span class="text-[10px] text-[#35D07F] font-bold uppercase tracking-widest block">Marketplace</span>
@@ -25,32 +25,29 @@
             </div>
         </div>
 
-        <!-- Buscador general adaptado -->
+        <!-- Buscador inteligente -->
         <div class="flex-1 max-w-xl mx-2 sm:mx-6">
             <div class="relative w-full">
-                <input type="text" id="input-buscador-global" onkeyup="ejecutarBusquedaGlobal()" placeholder="¿Qué servicio necesitás hoy?" class="w-full bg-[#2D2E32] text-white pl-9 pr-4 py-2 rounded-full text-xs sm:text-sm border border-gray-700 focus:outline-none focus:border-[#35D07F] transition">
+                <input type="text" id="input-buscador-global" onkeyup="ejecutarBusquedaGlobal()" placeholder="Buscar electricistas, plomeros, médicos, fletes..." class="w-full bg-[#2D2E32] text-white pl-9 pr-4 py-2 rounded-full text-xs sm:text-sm border border-gray-700 focus:outline-none focus:border-[#35D07F] transition">
                 <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400 text-xs sm:text-sm"></i>
             </div>
         </div>
 
-        <!-- Navegación por Paneles (Iconos en mobile, texto en desktop) -->
-        <div class="flex items-center gap-1.5 sm:gap-3">
-            <button onclick="cambiarVista('home')" class="p-2 sm:px-3 sm:py-2 rounded-xl text-xs font-bold bg-[#35D07F] text-[#202124] hover:bg-[#2bc472] transition" title="Inicio"><i class="fa-solid fa-house"></i><span class="hidden sm:inline ml-1">Inicio</span></button>
-            <button onclick="cambiarVista('panel-cliente')" class="p-2 sm:px-3 sm:py-2 rounded-xl text-xs font-bold bg-[#2D2E32] text-white hover:bg-gray-700 transition" title="Mi Panel"><i class="fa-solid fa-user"></i><span class="hidden sm:inline ml-1">Panel</span></button>
-            <button onclick="cambiarVista('panel-prestador')" class="p-2 sm:px-3 sm:py-2 rounded-xl text-xs font-bold bg-[#2D2E32] text-white hover:bg-gray-700 transition" title="Soy Prestador"><i class="fa-solid fa-briefcase"></i><span class="hidden sm:inline ml-1">Prestador</span></button>
+        <!-- Botones de Navegación e Interacción -->
+        <div class="flex items-center gap-2 sm:gap-3">
+            <button onclick="cambiarVista('home')" class="p-2 sm:px-3 sm:py-2 rounded-xl text-xs font-bold bg-[#35D07F] text-[#202124] hover:bg-[#2bc472] transition"><i class="fa-solid fa-house"></i><span class="hidden sm:inline ml-1">Inicio</span></button>
+            <button onclick="cambiarVista('favoritos')" class="p-2 sm:px-3 sm:py-2 rounded-xl text-xs font-bold bg-[#2D2E32] text-white hover:bg-gray-700 transition relative"><i class="fa-solid fa-heart text-red-400"></i><span id="badge-fav" class="absolute -top-1 -right-1 bg-red-500 text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span></button>
+            <button onclick="cambiarVista('panel-cliente')" class="p-2 sm:px-3 sm:py-2 rounded-xl text-xs font-bold bg-[#2D2E32] text-white hover:bg-gray-700 transition"><i class="fa-solid fa-user"></i><span class="hidden sm:inline ml-1">Cliente</span></button>
+            <button onclick="cambiarVista('panel-prestador')" class="p-2 sm:px-3 sm:py-2 rounded-xl text-xs font-bold bg-[#2D2E32] text-white hover:bg-gray-700 transition"><i class="fa-solid fa-briefcase"></i><span class="hidden sm:inline ml-1">Prestador</span></button>
         </div>
     </header>
 
-    <!-- CONTENEDOR PRINCIPAL DE VISTAS -->
+    <!-- CONTENEDOR DE VISTAS -->
     <div class="flex-1 overflow-hidden flex flex-col md:flex-row relative">
 
-        <!-- ============================================== -->
-        <!-- VISTA 1: HOME / MARKETPLACE PRINCIPAL -->
-        <!-- ============================================== -->
+        <!-- VISTA 1: HOME -->
         <div id="vista-home" class="flex-1 flex flex-col md:flex-row overflow-hidden w-full h-full">
-            
-            <!-- Sidebar Categorías (Oculto en mobile muy chico, scroll horizontal rápido o menú colapsable) -->
-            <aside class="w-full md:w-64 bg-white border-b md:border-b-0 md:border-r border-gray-200 flex flex-row md:flex-col shrink-0 overflow-x-auto md:overflow-y-auto p-3 gap-2 no-scrollbar z-10">
+            <aside class="w-full md:w-64 bg-white border-b md:border-b-0 md:border-r border-gray-200 flex flex-row md:flex-col shrink-0 overflow-x-auto md:overflow-y-auto p-3 gap-2 no-scrollbar z-10 shadow-sm">
                 <h3 class="hidden md:block font-bold text-xs text-gray-400 uppercase tracking-wider mb-2">Categorías</h3>
                 <button onclick="filtrarCategoria('Todos')" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold hover:bg-gray-100 flex items-center gap-2 shrink-0"><i class="fa-solid fa-border-all text-[#35D07F]"></i> Todos</button>
                 <button onclick="filtrarCategoria('Electricista')" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold hover:bg-gray-100 flex items-center gap-2 shrink-0"><i class="fa-solid fa-bolt text-[#35D07F]"></i> Electricistas</button>
@@ -60,14 +57,21 @@
                 <button onclick="filtrarCategoria('Traslados')" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold hover:bg-gray-100 flex items-center gap-2 shrink-0"><i class="fa-solid fa-van-shuttle text-[#35D07F]"></i> Fletes</button>
             </aside>
 
-            <!-- Grilla de Servicios -->
             <main class="flex-1 overflow-y-auto p-4 sm:p-6 bg-[#F5F5F5]">
                 <div class="max-w-7xl mx-auto">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-                        <h1 id="home-titulo" class="text-xl sm:text-2xl font-extrabold text-[#202124]">Servicios Destacados</h1>
-                        <button onclick="abrirModalPublicar()" class="w-full sm:w-auto bg-[#35D07F] hover:bg-[#2bc472] text-[#202124] font-bold px-4 py-2.5 rounded-xl shadow-md text-xs sm:text-sm transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-plus"></i> Publicar Servicio Gratis
-                        </button>
+                    <!-- Banner superior animado -->
+                    <div class="bg-gradient-to-r from-[#202124] to-gray-800 rounded-3xl p-6 mb-6 text-white flex justify-between items-center shadow-xl relative overflow-hidden">
+                        <div>
+                            <span class="bg-[#35D07F] text-[#202124] text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">GO Cuotas habilitado</span>
+                            <h2 class="text-xl sm:text-2xl font-extrabold mt-2">Contratá expertos con tarjeta de débito</h2>
+                            <p class="text-xs sm:text-sm text-gray-300 mt-1">Garantía Escrow 100% segura. NUVEX retiene el 8% hasta que apruebes el trabajo.</p>
+                        </div>
+                        <button onclick="abrirModalPublicar()" class="hidden sm:block bg-[#35D07F] text-[#202124] font-extrabold px-5 py-3 rounded-xl shadow hover:bg-[#2bc472] transition text-sm">Ofrecer Servicio</button>
+                    </div>
+
+                    <div class="flex justify-between items-center mb-4">
+                        <h1 id="home-titulo" class="text-xl font-extrabold text-[#202124]">Servicios Disponibles</h1>
+                        <button onclick="abrirModalPublicar()" class="sm:hidden bg-[#35D07F] text-[#202124] font-bold px-3 py-2 rounded-xl text-xs">Publicar</button>
                     </div>
 
                     <div id="grilla-home" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 pb-12">
@@ -77,115 +81,126 @@
             </main>
         </div>
 
-        <!-- ============================================== -->
-        <!-- VISTA 2: PANEL DE CLIENTE -->
-        <!-- ============================================== -->
+        <!-- VISTA 2: FAVORITOS -->
+        <div id="vista-favoritos" class="flex-1 flex flex-col overflow-y-auto p-4 sm:p-8 hidden bg-white w-full h-full">
+            <h2 class="text-2xl sm:text-3xl font-extrabold mb-6 text-[#202124]">Mis Profesionales Favoritos ❤️</h2>
+            <div id="grilla-favoritos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Dinámico -->
+            </div>
+        </div>
+
+        <!-- VISTA 3: CLIENTE -->
         <div id="vista-cliente" class="flex-1 flex flex-col overflow-y-auto p-4 sm:p-8 hidden bg-white w-full h-full">
-            <h2 class="text-2xl sm:text-3xl font-extrabold mb-6 text-[#202124]">Panel de Cliente</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8">
+            <h2 class="text-2xl sm:text-3xl font-extrabold mb-6 text-[#202124]">Panel de Cliente & Escrow</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                 <div class="bg-[#F5F5F5] p-5 rounded-2xl border border-gray-200">
                     <h3 class="text-gray-500 font-bold text-xs uppercase">Historial</h3>
-                    <p class="text-2xl sm:text-3xl font-extrabold mt-2 text-[#202124]">3 Servicios</p>
+                    <p class="text-2xl font-extrabold mt-2 text-[#202124]">3 Contrataciones</p>
                 </div>
                 <div class="bg-[#F5F5F5] p-5 rounded-2xl border border-gray-200">
-                    <h3 class="text-gray-500 font-bold text-xs uppercase">Garantía Escrow Activa</h3>
-                    <p class="text-2xl sm:text-3xl font-extrabold mt-2 text-[#35D07F]">1 En Proceso</p>
+                    <h3 class="text-gray-500 font-bold text-xs uppercase">Fondos Protegidos Escrow</h3>
+                    <p class="text-2xl font-extrabold mt-2 text-[#35D07F]" id="monto-escrow-activo">$18.000 ARS</p>
                 </div>
                 <div class="bg-[#F5F5F5] p-5 rounded-2xl border border-gray-200">
-                    <h3 class="text-gray-500 font-bold text-xs uppercase">Favoritos</h3>
-                    <p class="text-2xl sm:text-3xl font-extrabold mt-2 text-[#202124]">2 Profesionales</p>
+                    <h3 class="text-gray-500 font-bold text-xs uppercase">Opiniones Realizadas</h3>
+                    <p class="text-2xl font-extrabold mt-2 text-[#202124]">2 Calificaciones</p>
                 </div>
             </div>
-            <h3 class="text-lg sm:text-xl font-bold mb-4">Contrataciones Activas</h3>
-            <div id="lista-contrataciones-cliente" class="space-y-4">
-                <!-- Dinámico -->
-            </div>
+            <h3 class="text-lg font-bold mb-4">Garantías Activas en Curso</h3>
+            <div id="lista-contrataciones-cliente" class="space-y-4"></div>
         </div>
 
-        <!-- ============================================== -->
-        <!-- VISTA 3: PANEL DE PRESTADOR -->
-        <!-- ============================================== -->
+        <!-- VISTA 4: PRESTADOR -->
         <div id="vista-prestador" class="flex-1 flex flex-col overflow-y-auto p-4 sm:p-8 hidden bg-white w-full h-full">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-[#202124]">Panel del Prestador</h2>
-                <button onclick="comprarSuscripcionPremium()" class="w-full sm:w-auto bg-gradient-to-r from-amber-500 to-yellow-400 text-[#202124] font-extrabold px-4 sm:px-5 py-3 rounded-xl shadow-lg hover:scale-105 transition text-xs sm:text-sm">
-                    <i class="fa-solid fa-crown mr-2"></i> Suscripción Premium ($500.000)
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-[#202124]">Panel de Prestador Pro</h2>
+                <button onclick="comprarSuscripcionPremium()" class="bg-gradient-to-r from-amber-500 to-yellow-400 text-[#202124] font-extrabold px-5 py-3 rounded-xl shadow-lg hover:scale-105 transition text-xs sm:text-sm">
+                    <i class="fa-solid fa-crown mr-2"></i> Activar Destacado Premium ($500.000)
                 </button>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                 <div class="bg-[#F5F5F5] p-5 rounded-2xl border border-gray-200">
-                    <h3 class="text-gray-500 font-bold text-xs uppercase">Mis Servicios</h3>
-                    <p class="text-2xl sm:text-3xl font-extrabold mt-2" id="contador-mis-servicios">2 Activos</p>
+                    <h3 class="text-gray-500 font-bold text-xs uppercase">Servicios Activos</h3>
+                    <p class="text-2xl font-extrabold mt-2">2 Anuncios</p>
                 </div>
                 <div class="bg-[#F5F5F5] p-5 rounded-2xl border border-gray-200">
-                    <h3 class="text-gray-500 font-bold text-xs uppercase">Calificación</h3>
-                    <p class="text-2xl sm:text-3xl font-extrabold mt-2 text-yellow-500">⭐ 4.9</p>
+                    <h3 class="text-gray-500 font-bold text-xs uppercase">Reputación</h3>
+                    <p class="text-2xl font-extrabold mt-2 text-yellow-500">⭐ 5.0 (24 Opiniones)</p>
                 </div>
                 <div class="bg-[#F5F5F5] p-5 rounded-2xl border border-gray-200">
-                    <h3 class="text-gray-500 font-bold text-xs uppercase">Escrow a Liberar</h3>
-                    <p class="text-2xl sm:text-3xl font-extrabold mt-2 text-[#35D07F]">$15.000 ARS</p>
+                    <h3 class="text-gray-500 font-bold text-xs uppercase">Comisión Retenida NUVEX (8%)</h3>
+                    <p class="text-2xl font-extrabold mt-2 text-red-500">Automática</p>
                 </div>
             </div>
-            <h3 class="text-lg sm:text-xl font-bold mb-4">Servicios Publicados</h3>
-            <div id="lista-mis-servicios" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Dinámico -->
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold">Mis Publicaciones</h3>
+                <button onclick="abrirModalPublicar()" class="bg-[#35D07F] text-[#202124] font-bold px-4 py-2 rounded-xl text-xs">Crear Nuevo Servicio</button>
             </div>
+            <div id="lista-mis-servicios" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
         </div>
 
     </div>
 
-    <!-- ============================================== -->
-    <!-- MODAL: PERFIL Y CONTRATACIÓN (ESCROW & CHAT) -->
-    <!-- ============================================== -->
+    <!-- MODAL DETALLE CON PORTFOLIO, CHAT Y ESCROW -->
     <div id="modal-detalle" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
-        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-4 sm:p-6 shadow-2xl relative">
-            <button onclick="cerrarModal('modal-detalle')" class="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 w-9 h-9 rounded-full flex items-center justify-center font-bold z-10"><i class="fa-solid fa-xmark"></i></button>
-            <div id="contenido-modal-detalle">
-                <!-- Inyectado dinámicamente -->
-            </div>
+        <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-5 sm:p-8 shadow-2xl relative">
+            <button onclick="cerrarModal('modal-detalle')" class="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 w-10 h-10 rounded-full flex items-center justify-center font-bold z-10"><i class="fa-solid fa-xmark"></i></button>
+            <div id="contenido-modal-detalle"></div>
         </div>
     </div>
 
-    <!-- ============================================== -->
-    <!-- MODAL: PUBLICAR SERVICIO -->
-    <!-- ============================================== -->
+    <!-- MODAL CALIFICACIÓN CON FOTO -->
+    <div id="modal-calificacion" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
+            <button onclick="cerrarModal('modal-calificacion')" class="absolute top-4 right-4 text-gray-400 hover:text-black"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 class="text-xl font-extrabold mb-2 text-[#202124]">Calificar Trabajo Realizado</h3>
+            <p class="text-xs text-gray-500 mb-4">Tu opinión ayuda a mantener seguro el ecosistema NUVEX.</p>
+            <div class="flex gap-2 text-2xl text-yellow-400 mb-4 justify-center">
+                <i class="fa-solid fa-star cursor-pointer"></i><i class="fa-solid fa-star cursor-pointer"></i><i class="fa-solid fa-star cursor-pointer"></i><i class="fa-solid fa-star cursor-pointer"></i><i class="fa-solid fa-star cursor-pointer"></i>
+            </div>
+            <textarea placeholder="Escribí tu comentario sobre el servicio..." rows="3" class="w-full bg-gray-100 p-3 rounded-xl text-xs mb-3 border focus:outline-none"></textarea>
+            <label class="block text-[11px] font-bold text-gray-500 uppercase mb-1">Subir Foto del Trabajo Terminado</label>
+            <input type="file" class="w-full text-xs mb-4 border p-2 rounded-xl bg-gray-50">
+            <button onclick="enviarCalificacionReal()" class="w-full bg-[#35D07F] text-[#202124] font-extrabold py-3 rounded-xl text-xs shadow">Enviar Opinión Verificada</button>
+        </div>
+    </div>
+
+    <!-- MODAL PUBLICAR -->
     <div id="modal-publicar" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
         <div class="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <button onclick="cerrarModal('modal-publicar')" class="absolute top-4 right-4 text-gray-400 hover:text-black"><i class="fa-solid fa-xmark text-xl"></i></button>
-            <h2 class="text-xl sm:text-2xl font-extrabold mb-4 text-[#202124]">Publicar Nuevo Servicio</h2>
-            <form onsubmit="guardarNuevoServicio(event)" class="space-y-3 sm:space-y-4">
+            <h2 class="text-xl font-extrabold mb-4 text-[#202124]">Publicar Servicio en NUVEX</h2>
+            <form onsubmit="guardarNuevoServicio(event)" class="space-y-3">
                 <div>
-                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Nombre del Servicio</label>
-                    <input type="text" id="pub-titulo" required placeholder="Ej. Electricista Matriculado" class="w-full bg-gray-100 px-4 py-2.5 rounded-xl text-xs sm:text-sm border border-gray-200 focus:outline-none focus:border-[#35D07F]">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Título del Servicio</label>
+                    <input type="text" id="pub-titulo" required placeholder="Ej. Plomero Destapes 24hs" class="w-full bg-gray-100 px-4 py-2.5 rounded-xl text-xs border focus:outline-none">
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Categoría</label>
-                        <select id="pub-cat" class="w-full bg-gray-100 px-4 py-2.5 rounded-xl text-xs sm:text-sm border border-gray-200 focus:outline-none focus:border-[#35D07F]">
-                            <option>Electricista</option><option>Plomero</option><option>Albañil</option><option>Médicos</option><option>Traslados</option><option>Excursiones</option>
+                        <select id="pub-cat" class="w-full bg-gray-100 px-4 py-2.5 rounded-xl text-xs border">
+                            <option>Electricista</option><option>Plomero</option><option>Albañil</option><option>Médicos</option><option>Traslados</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Precio Estimado (ARS)</label>
-                        <input type="number" id="pub-precio" required placeholder="15000" class="w-full bg-gray-100 px-4 py-2.5 rounded-xl text-xs sm:text-sm border border-gray-200 focus:outline-none focus:border-[#35D07F]">
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Precio Base (ARS)</label>
+                        <input type="number" id="pub-precio" required placeholder="15000" class="w-full bg-gray-100 px-4 py-2.5 rounded-xl text-xs border">
                     </div>
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Descripción Completa</label>
-                    <textarea id="pub-desc" rows="3" required placeholder="Detallá tu experiencia..." class="w-full bg-gray-100 px-4 py-2.5 rounded-xl text-xs sm:text-sm border border-gray-200 focus:outline-none focus:border-[#35D07F]"></textarea>
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Descripción y Cobertura</label>
+                    <textarea id="pub-desc" rows="3" required placeholder="Detallá tu experiencia..." class="w-full bg-gray-100 px-4 py-2.5 rounded-xl text-xs border"></textarea>
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">URL de Foto de Trabajo</label>
-                    <input type="text" id="pub-foto" placeholder="https://images.unsplash.com/..." class="w-full bg-gray-100 px-4 py-2.5 rounded-xl text-xs sm:text-sm border border-gray-200 focus:outline-none focus:border-[#35D07F]">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">URL de Foto Principal de Trabajo</label>
+                    <input type="text" id="pub-foto" placeholder="https://images.unsplash.com/..." class="w-full bg-gray-100 px-4 py-2.5 rounded-xl text-xs border">
                 </div>
-                <button type="submit" class="w-full bg-[#35D07F] hover:bg-[#2bc472] text-[#202124] font-extrabold py-3 sm:py-3.5 rounded-xl shadow-md transition text-xs sm:text-sm">Publicar Anuncio Gratis</button>
+                <button type="submit" class="w-full bg-[#35D07F] hover:bg-[#2bc472] text-[#202124] font-extrabold py-3 rounded-xl shadow text-xs">Publicar Ahora Gratis</button>
             </form>
         </div>
     </div>
 
-    <!-- ============================================== -->
-    <!-- SCRIPT DE LÓGICA Y DATOS -->
-    <!-- ============================================== -->
+    <!-- SCRIPT DE LÓGICA PRO V3.0 -->
     <script>
         let baseServicios = [
             {
@@ -201,7 +216,12 @@
                 fotoTrabajo: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=600&q=80",
                 fotoPerfil: "https://ui-avatars.com/api/?name=Maxi+Pipet&background=202124&color=35D07F",
                 destacado: true,
-                verificado: true
+                verificado: true,
+                portfolio: [
+                    "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=400&q=80",
+                    "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=400&q=80",
+                    "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=400&q=80"
+                ]
             },
             {
                 id: 2,
@@ -216,35 +236,29 @@
                 fotoTrabajo: "https://images.unsplash.com/photo-1574359411659-15573a27fd0c?auto=format&fit=crop&w=600&q=80",
                 fotoPerfil: "https://randomuser.me/api/portraits/women/44.jpg",
                 destacado: true,
-                verificado: true
-            },
-            {
-                id: 3,
-                nombre: "Roberto Sánchez",
-                oficio: "Plomero Gasista",
-                categoria: "Plomero",
-                rating: 4.7,
-                opinionesCount: 15,
-                ubicacion: "Corrientes, Melilla",
-                precio: 12000,
-                descripcion: "Destapes de cañerías con máquina, reparación de fugas de gas y colocación de sanitarios.",
-                fotoTrabajo: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=600&q=80",
-                fotoPerfil: "https://randomuser.me/api/portraits/men/22.jpg",
-                destacado: false,
-                verificado: true
+                verificado: true,
+                portfolio: [
+                    "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=400&q=80"
+                ]
             }
         ];
 
+        let favoritos = [];
         let misContrataciones = [
             { id: 101, servicio: "Electricista Matriculado", prestador: "Maximiliano Pipet", monto: 18000, comision: 1440, estado: "En Proceso (Garantía Escrow retenida)" }
         ];
 
         function cambiarVista(vista) {
             document.getElementById('vista-home').classList.add('hidden');
+            document.getElementById('vista-favoritos').classList.add('hidden');
             document.getElementById('vista-cliente').classList.add('hidden');
             document.getElementById('vista-prestador').classList.add('hidden');
 
             if(vista === 'home') document.getElementById('vista-home').classList.remove('hidden');
+            if(vista === 'favoritos') {
+                document.getElementById('vista-favoritos').classList.remove('hidden');
+                renderizarFavoritos();
+            }
             if(vista === 'panel-cliente') {
                 document.getElementById('vista-cliente').classList.remove('hidden');
                 renderizarContratacionesCliente();
@@ -264,20 +278,24 @@
             }
 
             datos.forEach(srv => {
-                const badgeDestacado = srv.destacado ? `<span class="absolute top-3 left-3 bg-[#35D07F] text-[#202124] text-[10px] font-extrabold px-2.5 py-1 rounded-md shadow uppercase tracking-wider">Destacado Premium</span>` : '';
+                const esFav = favoritos.includes(srv.id);
+                const badgeDestacado = srv.destacado ? `<span class="absolute top-3 left-3 bg-[#35D07F] text-[#202124] text-[10px] font-extrabold px-2 py-0.5 rounded shadow uppercase">Destacado Premium</span>` : '';
+                
                 const card = document.createElement('div');
-                card.className = "bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition flex flex-col cursor-pointer";
-                card.onclick = () => abrirDetalleServicio(srv.id);
+                card.className = "bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition flex flex-col relative";
 
                 card.innerHTML = `
-                    <div class="h-40 sm:h-44 relative bg-gray-100 overflow-hidden">
+                    <button onclick="toggleFavorito(event, ${srv.id})" class="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center shadow transition hover:scale-110">
+                        <i class="fa-solid fa-heart ${esFav ? 'text-red-500' : 'text-gray-300'}"></i>
+                    </button>
+                    <div class="h-40 sm:h-44 relative bg-gray-100 overflow-hidden cursor-pointer" onclick="abrirDetalleServicio(${srv.id})">
                         ${badgeDestacado}
                         <img src="${srv.fotoTrabajo}" class="w-full h-full object-cover hover:scale-105 transition duration-500">
                         <div class="absolute -bottom-4 right-4 w-12 h-12 rounded-full border-2 border-white overflow-hidden shadow bg-white">
                             <img src="${srv.fotoPerfil}" class="w-full h-full object-cover">
                         </div>
                     </div>
-                    <div class="p-4 sm:p-5 pt-6 flex-1 flex flex-col justify-between">
+                    <div class="p-4 sm:p-5 pt-6 flex-1 flex flex-col justify-between cursor-pointer" onclick="abrirDetalleServicio(${srv.id})">
                         <div>
                             <div class="flex justify-between items-start mb-1">
                                 <h3 class="font-extrabold text-sm sm:text-base text-[#202124] flex items-center">${srv.nombre} <i class="fa-solid fa-circle-check text-blue-500 text-xs ml-1" title="Verificado con DNI"></i></h3>
@@ -291,7 +309,7 @@
                                 <span class="text-[10px] text-gray-400 uppercase font-bold block">Precio base</span>
                                 <span class="font-extrabold text-sm sm:text-base text-gray-900">$${srv.precio.toLocaleString()}</span>
                             </div>
-                            <span class="text-xs font-bold bg-[#202124] text-[#35D07F] px-3 py-2 rounded-xl">Ver y Contratar</span>
+                            <span class="text-xs font-bold bg-[#202124] text-[#35D07F] px-3 py-2 rounded-xl">Ver Perfil</span>
                         </div>
                     </div>
                 `;
@@ -300,8 +318,40 @@
         }
         renderizarGrilla(baseServicios);
 
+        function toggleFavorito(e, id) {
+            e.stopPropagation();
+            const idx = favoritos.indexOf(id);
+            if(idx > -1) favoritos.splice(idx, 1);
+            else favoritos.push(id);
+            
+            document.getElementById('badge-fav').innerText = favoritos.length;
+            renderizarGrilla(baseServicios);
+        }
+
+        function renderizarFavoritos() {
+            const grilla = document.getElementById('grilla-favoritos');
+            grilla.innerHTML = '';
+            const favs = baseServicios.filter(s => favoritos.includes(s.id));
+            if(favs.length === 0) {
+                grilla.innerHTML = '<p class="text-gray-500 col-span-full">No guardaste favoritos todavía.</p>';
+                return;
+            }
+            favs.forEach(srv => {
+                grilla.innerHTML += `
+                    <div class="bg-gray-50 p-4 rounded-2xl border flex gap-4 items-center cursor-pointer" onclick="abrirDetalleServicio(${srv.id})">
+                        <img src="${srv.fotoTrabajo}" class="w-16 h-16 rounded-xl object-cover">
+                        <div>
+                            <h4 class="font-bold text-sm">${srv.nombre}</h4>
+                            <p class="text-xs text-[#35D07F] font-bold">${srv.oficio}</p>
+                            <p class="text-xs font-extrabold mt-1">$${srv.precio.toLocaleString()}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
         function filtrarCategoria(cat) {
-            document.getElementById('home-titulo').innerText = cat === 'Todos' ? 'Servicios Destacados' : `Categoría: ${cat}`;
+            document.getElementById('home-titulo').innerText = cat === 'Todos' ? 'Servicios Disponibles' : `Categoría: ${cat}`;
             if(cat === 'Todos') renderizarGrilla(baseServicios);
             else renderizarGrilla(baseServicios.filter(s => s.categoria === cat));
         }
@@ -317,8 +367,15 @@
             const modal = document.getElementById('modal-detalle');
             const contenedor = document.getElementById('contenido-modal-detalle');
 
+            let portfolioHTML = '';
+            if(srv.portfolio && srv.portfolio.length > 0) {
+                portfolioHTML = `<h4 class="font-bold text-xs text-gray-700 uppercase mt-4 mb-2">Trabajos Realizados (Portfolio)</h4><div class="grid grid-cols-3 gap-2">`;
+                srv.portfolio.forEach(img => { portfolioHTML += `<img src="${img}" class="w-full h-20 object-cover rounded-xl shadow-sm">`; });
+                portfolioHTML += `</div>`;
+            }
+
             contenedor.innerHTML = `
-                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
                     <img src="${srv.fotoPerfil}" class="w-16 h-16 rounded-full border-2 border-[#35D07F] object-cover shrink-0">
                     <div>
                         <h2 class="text-xl sm:text-2xl font-extrabold text-[#202124] flex items-center">${srv.nombre} <i class="fa-solid fa-circle-check text-blue-500 text-sm ml-2"></i></h2>
@@ -328,39 +385,38 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <img src="${srv.fotoTrabajo}" class="w-full h-44 sm:h-48 object-cover rounded-2xl shadow">
-                        <p class="text-xs text-gray-500 mt-2">${srv.descripcion}</p>
+                        <img src="${srv.fotoTrabajo}" class="w-full h-44 object-cover rounded-2xl shadow">
+                        <p class="text-xs text-gray-600 mt-2">${srv.descripcion}</p>
+                        ${portfolioHTML}
                     </div>
-                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200 flex flex-col justify-between">
+                    <div class="bg-gray-50 p-4 rounded-2xl border flex flex-col justify-between">
                         <div>
-                            <h4 class="font-bold text-xs mb-2"><i class="fa-solid fa-lock text-[#35D07F]"></i> Chat Interno Obligatorio</h4>
-                            <div id="caja-chat" class="bg-white h-28 sm:h-32 rounded-xl border p-2 overflow-y-auto text-xs space-y-1 mb-2">
-                                <p class="text-gray-400 italic">Negociá de forma segura. Si enviás números de teléfono o CBU externo, el sistema bloqueará el mensaje.</p>
+                            <h4 class="font-bold text-xs mb-2 text-[#202124]"><i class="fa-solid fa-lock text-[#35D07F]"></i> Chat Interno Seguro (Anti-Fugas)</h4>
+                            <div id="caja-chat" class="bg-white h-28 rounded-xl border p-2 overflow-y-auto text-xs space-y-1 mb-2">
+                                <p class="text-gray-400 italic">Negociá seguro. Si enviás números de teléfono o CBU externo, el sistema bloqueará el mensaje.</p>
                             </div>
                         </div>
                         <div class="flex gap-2">
-                            <input type="text" id="input-chat" placeholder="Escribí tu consulta..." class="flex-1 bg-white border px-3 py-2 rounded-xl text-xs focus:outline-none">
+                            <input type="text" id="input-chat" placeholder="Escribí una consulta..." class="flex-1 bg-white border px-3 py-2 rounded-xl text-xs focus:outline-none">
                             <button onclick="enviarMensajeChat()" class="bg-[#202124] text-white px-3 py-2 rounded-xl text-xs font-bold">Enviar</button>
                         </div>
                     </div>
                 </div>
-                <div class="bg-[#202124] text-white p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div class="bg-[#202124] text-white p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-4">
                     <div>
-                        <span class="text-[10px] text-gray-400 uppercase font-bold block">Total a Pagar (Garantía Escrow)</span>
+                        <span class="text-[10px] text-gray-400 uppercase font-bold block">Garantía Escrow NUVEX</span>
                         <span class="text-xl sm:text-2xl font-extrabold text-[#35D07F]">$${srv.precio.toLocaleString()}</span>
-                        <span class="text-[9px] text-gray-300 block">NUVEX retiene 8% ($${(srv.precio*0.08).toFixed(0)}) hasta que califiques.</span>
+                        <span class="text-[9px] text-gray-300 block">Acepta débito y 3 cuotas con GO Cuotas.</span>
                     </div>
-                    <button onclick="contratarConEscrow(${srv.precio}, '${srv.nombre}')" class="w-full sm:w-auto bg-[#35D07F] hover:bg-[#2bc472] text-[#202124] font-extrabold px-5 py-3 rounded-xl shadow-lg transition text-xs sm:text-sm">
-                        Pagar en Cuotas (Débito / GO Cuotas)
+                    <button onclick="contratarConEscrow(${srv.precio}, '${srv.nombre}')" class="w-full sm:w-auto bg-[#35D07F] hover:bg-[#2bc472] text-[#202124] font-extrabold px-6 py-3.5 rounded-xl shadow transition text-xs sm:text-sm">
+                        Contratar con Garantía
                     </button>
                 </div>
             `;
             modal.classList.remove('hidden');
         }
 
-        function cerrarModal(id) {
-            document.getElementById(id).classList.add('hidden');
-        }
+        function cerrarModal(id) { document.getElementById(id).classList.add('hidden'); }
 
         function enviarMensajeChat() {
             const input = document.getElementById('input-chat');
@@ -370,7 +426,7 @@
 
             const regexFuga = /(\d{8,}|whatsapp|contacto|cbu|alias|telefono|cel)/i;
             if(regexFuga.test(val)) {
-                alert('⚠️ NUVEX Security: Está prohibido compartir datos de contacto externos para evitar estafas. Use la pasarela interna.');
+                alert('⚠️ Alerta NUVEX Security: Prohibido compartir contactos externos. Mensaje bloqueado.');
                 input.value = '';
                 return;
             }
@@ -388,9 +444,9 @@
                 prestador: prestador,
                 monto: monto,
                 comision: comision,
-                estado: "En Proceso (Garantía Escrow retenida)"
+                estado: "En Proceso (Fondos Asegurados)"
             });
-            alert('🔒 ¡Pago procesado con éxito! Los fondos quedaron retenidos en la cuenta de garantía Escrow de NUVEX.');
+            alert('🔒 ¡Pago asegurado en Escrow! El dinero se liberará al prestador recién cuando confirmes que el trabajo finalizó.');
             cerrarModal('modal-detalle');
             cambiarVista('panel-cliente');
         }
@@ -400,27 +456,27 @@
             contenedor.innerHTML = '';
             misContrataciones.forEach(c => {
                 contenedor.innerHTML += `
-                    <div class="bg-[#F5F5F5] p-4 sm:p-5 rounded-2xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div class="bg-[#F5F5F5] p-4 sm:p-5 rounded-2xl border flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <div>
                             <h4 class="font-bold text-base text-[#202124]">${c.prestador}</h4>
-                            <p class="text-xs text-gray-500">Monto total: $${c.monto.toLocaleString()} (Comisión NUVEX retenida: $${c.comision.toFixed(0)})</p>
+                            <p class="text-xs text-gray-500">Monto: $${c.monto.toLocaleString()} (Retención 8% NUVEX: $${c.comision.toFixed(0)})</p>
                             <span class="inline-block mt-2 px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded-lg">${c.estado}</span>
                         </div>
-                        <button onclick="marcarCompletado(${c.id})" class="w-full sm:w-auto bg-[#35D07F] text-[#202124] font-bold px-4 py-2.5 rounded-xl text-xs hover:bg-[#2bc472] transition">
-                            Marcar como Completado
+                        <button onclick="abrirModalCalificacion()" class="w-full sm:w-auto bg-[#35D07F] text-[#202124] font-bold px-4 py-2.5 rounded-xl text-xs hover:bg-[#2bc472] transition">
+                            Marcar Completado & Calificar
                         </button>
                     </div>
                 `;
             });
         }
 
-        function marcarCompletado(id) {
-            const item = misContrataciones.find(x => x.id === id);
-            if(item) {
-                item.estado = "Completado (Fondos liberados al prestador)";
-                alert('⭐ ¡Trabajo finalizado! El 92% de los fondos se liberaron al prestador.');
-                renderizarContratacionesCliente();
-            }
+        function abrirModalCalificacion() { document.getElementById('modal-calificacion').classList.remove('hidden'); }
+        
+        function enviarCalificacionReal() {
+            alert('⭐ ¡Opinión y foto verificada subida con éxito! Fondos liberados al prestador.');
+            cerrarModal('modal-calificacion');
+            misContrataciones[0].estado = "Completado y Calificado";
+            renderizarContratacionesCliente();
         }
 
         function abrirModalPublicar() { document.getElementById('modal-publicar').classList.remove('hidden'); }
@@ -440,7 +496,8 @@
                 fotoTrabajo: document.getElementById('pub-foto').value || "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80",
                 fotoPerfil: "https://ui-avatars.com/api/?name=Tu+Nombre&background=202124&color=35D07F",
                 destacado: false,
-                verificado: true
+                verificado: true,
+                portfolio: []
             };
             baseServicios.unshift(nuevo);
             cerrarModal('modal-publicar');
@@ -453,12 +510,12 @@
             contenedor.innerHTML = '';
             baseServicios.slice(0, 2).forEach(s => {
                 contenedor.innerHTML += `
-                    <div class="bg-[#F5F5F5] p-4 rounded-2xl border border-gray-200 flex gap-4 items-center">
-                        <img src="${s.fotoTrabajo}" class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover shrink-0">
+                    <div class="bg-[#F5F5F5] p-4 rounded-2xl border flex gap-4 items-center">
+                        <img src="${s.fotoTrabajo}" class="w-16 h-16 rounded-xl object-cover shrink-0">
                         <div>
                             <h4 class="font-bold text-xs sm:text-sm">${s.oficio}</h4>
                             <p class="text-xs text-[#35D07F] font-bold">Precio: $${s.precio.toLocaleString()}</p>
-                            <span class="text-[10px] bg-green-100 text-green-800 font-bold px-2 py-0.5 rounded">Activo en Búsquedas</span>
+                            <span class="text-[10px] bg-green-100 text-green-800 font-bold px-2 py-0.5 rounded">Activo</span>
                         </div>
                     </div>
                 `;
@@ -466,7 +523,7 @@
         }
 
         function comprarSuscripcionPremium() {
-            alert('👑 ¡Suscripción Premium activada por $500.000 ARS! Tu anuncio pasará a figurar primero en todas las búsquedas nacionales de NUVEX.');
+            alert('👑 ¡Suscripción Premium activada por $500.000 ARS! Anuncio destacado por 30 días.');
         }
     </script>
 </body>
