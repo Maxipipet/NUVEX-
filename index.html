@@ -1,242 +1,193 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicios Ya | Tu solución al instante</title>
+    <title>NUVEX | Marketplace de Servicios</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
+        /* Ocultar scrollbar visualmente pero permitir scroll */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-[#F5F5F5] text-[#202124] antialiased selection:bg-[#35D07F] selection:text-[#202124]">
+<body class="bg-[#F5F5F5] text-[#202124] h-screen flex flex-col overflow-hidden">
 
-    <!-- BARRA DE NAVEGACIÓN -->
-    <header class="sticky top-0 z-50 bg-[#F5F5F5]/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- LOGO / MARCA -->
-            <div class="flex items-center gap-3">
-                <div class="bg-[#202124] text-white font-extrabold text-lg px-3.5 py-2 rounded-xl tracking-wider shadow-sm flex items-center gap-2">
-                    <div class="w-3 h-3 bg-[#35D07F] rounded-full"></div>
-                    SERVICIOS YA
+    <!-- BARRA SUPERIOR (Estilo Facebook) -->
+    <header class="bg-white h-16 border-b border-gray-200 flex items-center justify-between px-4 sticky top-0 z-50 shrink-0 shadow-sm">
+        
+        <!-- Zona Izquierda: LOGO -->
+        <div class="flex items-center w-1/4">
+            <a href="#" class="flex items-center">
+                <!-- Acá va tu logo.jpeg con el fondo blanco fusionado -->
+                <img src="logo.jpeg" alt="NUVEX" class="h-10 mix-blend-multiply object-contain">
+            </a>
+        </div>
+
+        <!-- Zona Central: BUSCADOR -->
+        <div class="flex-1 max-w-2xl flex justify-center">
+            <div class="relative w-full">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
                 </div>
-                <div class="hidden sm:flex flex-col">
-                    <span class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Marketplace</span>
-                </div>
+                <input type="text" class="block w-full pl-10 pr-3 py-2.5 bg-gray-100 border-none rounded-full text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#35D07F] transition-shadow" placeholder="¿Qué servicio necesitás hoy? (Ej. Electricista, Flete, Médico)">
             </div>
+        </div>
 
-            <!-- MENÚ DE NAVEGACIÓN -->
-            <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-600">
-                <a href="#inicio" class="hover:text-[#35D07F] transition">Inicio</a>
-                <a href="#categorias" class="hover:text-[#35D07F] transition">Categorías</a>
-                <a href="#beneficios" class="hover:text-[#35D07F] transition">Beneficios</a>
-                <a href="#contacto" class="hover:text-[#35D07F] transition">Ser Prestador</a>
-            </nav>
-
-            <!-- BOTÓN CTA -->
-            <div>
-                <a href="#contacto" class="bg-[#35D07F] hover:bg-[#2bc472] text-[#202124] text-sm font-bold px-5 py-2.5 rounded-xl shadow-md transition transform hover:-translate-y-0.5">
-                    Descargar App
-                </a>
+        <!-- Zona Derecha: MENÚ DE USUARIO -->
+        <div class="flex items-center justify-end w-1/4 gap-3">
+            <button class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-700 transition">
+                <i class="fa-solid fa-bell"></i>
+            </button>
+            <button class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-700 transition">
+                <i class="fa-brands fa-facebook-messenger"></i>
+            </button>
+            <div class="ml-2 w-10 h-10 rounded-full bg-[#202124] border-2 border-[#35D07F] overflow-hidden cursor-pointer">
+                <img src="https://ui-avatars.com/api/?name=Maxi+Pipet&background=202124&color=35D07F" alt="Perfil" class="w-full h-full object-cover">
             </div>
         </div>
     </header>
 
-    <!-- SECCIÓN HERO (PORTADA) -->
-    <section id="inicio" class="relative bg-[#202124] text-white py-24 lg:py-36 overflow-hidden">
-        <!-- Imagen de fondo con overlay oscuro -->
-        <div class="absolute inset-0 opacity-20 bg-cover bg-center mix-blend-overlay" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1920&q=80');"></div>
+    <!-- CUERPO PRINCIPAL -->
+    <div class="flex flex-1 overflow-hidden">
         
-        <!-- Elementos decorativos NUVEX -->
-        <div class="absolute -top-40 -right-40 w-96 h-96 bg-[#35D07F]/20 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl space-y-8">
-                <div class="inline-flex items-center gap-2 bg-white/10 border border-[#35D07F]/50 text-[#35D07F] text-xs uppercase tracking-widest px-4 py-1.5 rounded-full font-bold">
-                    <i class="fa-solid fa-bolt"></i> Rápido, Seguro y Confiable
-                </div>
-                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.1]">
-                    ¿Qué servicio necesitás <span class="text-[#35D07F]">hoy?</span>
-                </h1>
-                <p class="text-lg sm:text-xl text-gray-300 font-normal leading-relaxed max-w-2xl">
-                    Conectamos a clientes con los mejores profesionales y oficios de la zona. Desde electricistas y plomeros, hasta médicos y traslados. Todo en una sola app.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 pt-2">
-                    <a href="#categorias" class="bg-[#35D07F] hover:bg-[#2bc472] text-[#202124] font-bold px-8 py-4 rounded-xl shadow-lg transition text-center flex items-center justify-center gap-2">
-                        Buscar un Servicio <i class="fa-solid fa-search text-xs"></i>
-                    </a>
-                    <a href="#contacto" class="bg-transparent hover:bg-white/10 border border-white/30 text-white font-semibold px-8 py-4 rounded-xl backdrop-blur-xs transition text-center flex items-center justify-center">
-                        Quiero ofrecer mis servicios
-                    </a>
-                </div>
+        <!-- BARRA LATERAL IZQUIERDA (Filtros y Categorías) -->
+        <aside class="w-80 bg-white border-r border-gray-200 flex flex-col hidden md:flex shrink-0 z-10 shadow-[4px_0_15px_-10px_rgba(0,0,0,0.1)]">
+            <div class="p-4 border-b border-gray-200">
+                <h2 class="text-xl font-bold text-[#202124]">Marketplace</h2>
             </div>
-        </div>
-    </section>
-
-    <!-- SECCIÓN DE CATEGORÍAS -->
-    <section id="categorias" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <h2 class="text-xs font-bold text-[#35D07F] uppercase tracking-widest">Servicios Destacados</h2>
-            <h3 class="text-3xl sm:text-4xl font-extrabold text-[#202124]">Encontrá al experto ideal</h3>
-            <p class="text-gray-600 text-base">Perfiles verificados con fotos de trabajos reales y calificaciones de otros usuarios.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Tarjeta 1: Mantenimiento -->
-            <div class="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col">
-                <div class="h-48 bg-gray-200 relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=600&q=80" alt="Plomero" class="w-full h-full object-cover hover:scale-105 transition duration-500">
-                    <span class="absolute top-3 left-3 bg-[#202124] text-[#35D07F] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Hogar</span>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between text-xs text-gray-500">
-                            <span><i class="fa-solid fa-star text-yellow-400 mr-1"></i> 4.8 Promedio</span>
-                        </div>
-                        <h5 class="text-lg font-bold text-[#202124]">Mantenimiento y Reparación</h5>
-                        <p class="text-gray-600 text-sm leading-relaxed">Electricistas, plomeros, mecánicos y técnicos informáticos listos para solucionar tus urgencias.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 2: Construcción -->
-            <div class="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col">
-                <div class="h-48 bg-gray-200 relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356f27?auto=format&fit=crop&w=600&q=80" alt="Albañil" class="w-full h-full object-cover hover:scale-105 transition duration-500">
-                    <span class="absolute top-3 left-3 bg-[#202124] text-[#35D07F] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Obras</span>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between text-xs text-gray-500">
-                            <span><i class="fa-solid fa-star text-yellow-400 mr-1"></i> 4.9 Promedio</span>
-                        </div>
-                        <h5 class="text-lg font-bold text-[#202124]">Construcción y Remodelación</h5>
-                        <p class="text-gray-600 text-sm leading-relaxed">Albañiles, pintores, jardineros y personal de limpieza para renovar tus espacios.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 3: Profesionales -->
-            <div class="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col">
-                <div class="h-48 bg-gray-200 relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1638202993928-7267aad84c31?auto=format&fit=crop&w=600&q=80" alt="Médico" class="w-full h-full object-cover hover:scale-105 transition duration-500">
-                    <span class="absolute top-3 left-3 bg-[#202124] text-[#35D07F] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Profesional</span>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between text-xs text-gray-500">
-                            <span><i class="fa-solid fa-star text-yellow-400 mr-1"></i> 5.0 Promedio</span>
-                        </div>
-                        <h5 class="text-lg font-bold text-[#202124]">Salud y Logística</h5>
-                        <p class="text-gray-600 text-sm leading-relaxed">Dentistas, médicos particulares, fletes, traslados y excursiones programadas.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECCIÓN BENEFICIOS -->
-    <section id="beneficios" class="bg-[#202124] text-white py-24 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="space-y-6">
-                    <span class="text-[#35D07F] font-bold uppercase tracking-widest text-xs">Por qué elegirnos</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Pagá cómodo, contratá seguro.</h2>
-                    <p class="text-gray-300 text-base leading-relaxed">
-                        No solo te conectamos con el mejor profesional, sino que te damos las herramientas para que tu experiencia sea perfecta de principio a fin.
-                    </p>
-                    <div class="space-y-4 pt-4">
-                        <div class="flex items-start gap-4">
-                            <div class="bg-[#35D07F]/20 p-3 rounded-lg text-[#35D07F]"><i class="fa-solid fa-credit-card"></i></div>
-                            <div>
-                                <h4 class="font-bold text-white">Pagos en Cuotas con Débito</h4>
-                                <p class="text-sm text-gray-400">Integración exclusiva con GO Cuotas para que pagues sin necesidad de tarjeta de crédito.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="bg-[#35D07F]/20 p-3 rounded-lg text-[#35D07F]"><i class="fa-solid fa-shield-halved"></i></div>
-                            <div>
-                                <h4 class="font-bold text-white">Sistema de Opiniones Real</h4>
-                                <p class="text-sm text-gray-400">Las reseñas y fotos de trabajos terminados solo pueden ser subidas por clientes verificados.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-[#F5F5F5] rounded-3xl p-8 flex items-center justify-center transform rotate-2 shadow-2xl">
-                    <!-- Mockup App Visual -->
-                    <div class="bg-white border-4 border-[#202124] rounded-[2rem] w-64 h-[28rem] shadow-xl overflow-hidden relative">
-                        <div class="absolute top-0 w-full h-16 bg-[#202124] flex items-center justify-center">
-                            <span class="text-[#35D07F] font-bold">SERVICIOS YA</span>
-                        </div>
-                        <div class="mt-20 px-4 space-y-4">
-                            <div class="h-10 bg-gray-100 rounded-lg w-full"></div>
-                            <div class="flex gap-2">
-                                <div class="h-20 w-20 bg-gray-200 rounded-lg"></div>
-                                <div class="h-20 w-20 bg-gray-200 rounded-lg"></div>
-                            </div>
-                            <div class="h-24 bg-gray-100 rounded-xl w-full"></div>
-                            <div class="h-12 bg-[#35D07F] rounded-xl w-full"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECCIÓN DE CONTACTO E INSCRIPCIONES -->
-    <section id="contacto" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-[#202124] text-white rounded-3xl p-8 sm:p-16 shadow-2xl flex flex-col lg:flex-row gap-12 items-center justify-between border-t-4 border-[#35D07F]">
-            <div class="space-y-6 lg:w-1/2">
-                <div class="inline-flex items-center gap-2 bg-[#35D07F]/20 text-[#35D07F] text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full font-bold">
-                    <i class="fa-solid fa-briefcase"></i> Sumate al Equipo
-                </div>
-                <h3 class="text-3xl sm:text-4xl font-extrabold">Multiplicá tus clientes hoy mismo.</h3>
-                <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
-                    Publicá tu servicio de forma gratuita. Accedé a tu panel de control, recibí solicitudes, gestioná tus mensajes y destacá tu anuncio (Suscripción Premium) para aparecer primero en las búsquedas.
-                </p>
-            </div>
-
-            <!-- Formulario de Pre-registro -->
-            <div class="bg-white text-[#202124] p-8 rounded-2xl w-full lg:w-1/2 space-y-4 shadow-xl">
-                <h4 class="text-xl font-bold mb-2">Pre-registro de Prestador</h4>
-                <div>
-                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Nombre y Apellido</label>
-                    <input type="text" placeholder="Ej. Juan Pérez" class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#35D07F] focus:ring-1 focus:ring-[#35D07F] transition">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Oficio o Servicio</label>
-                    <input type="text" placeholder="Ej. Electricista Matriculado" class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#35D07F] focus:ring-1 focus:ring-[#35D07F] transition">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Teléfono / WhatsApp</label>
-                    <input type="tel" placeholder="+54 9 11 0000 0000" class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#35D07F] focus:ring-1 focus:ring-[#35D07F] transition">
-                </div>
-                <button class="w-full bg-[#35D07F] hover:bg-[#2bc472] text-[#202124] font-bold py-3.5 rounded-xl transition text-sm shadow-md mt-2">
-                    Notificarme cuando la app salga
+            
+            <div class="p-4 overflow-y-auto no-scrollbar flex-1">
+                <!-- Botones de Acción -->
+                <button class="w-full flex items-center gap-3 bg-[#35D07F]/10 text-[#202124] hover:bg-[#35D07F]/20 p-3 rounded-lg font-semibold transition mb-4">
+                    <div class="bg-[#35D07F] text-[#202124] w-8 h-8 rounded-full flex items-center justify-center"><i class="fa-solid fa-plus"></i></div>
+                    Publicar un Servicio
                 </button>
-            </div>
-        </div>
-    </section>
 
-    <!-- PIE DE PÁGINA -->
-    <footer class="bg-[#202124] border-t border-gray-800 py-12 text-gray-400 text-xs">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-3">
-                <span class="text-gray-300 font-medium">&copy; 2026 SERVICIOS YA. Todos los derechos reservados.</span>
-            </div>
-            <div class="flex gap-6 text-base text-[#35D07F]">
-                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-whatsapp"></i></a>
-                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-app-store"></i></a>
-                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-google-play"></i></a>
-            </div>
-        </div>
-    </footer>
+                <!-- Categorías -->
+                <h3 class="font-bold text-gray-900 mb-3 text-sm px-2">Categorías</h3>
+                <ul class="space-y-1">
+                    <li><a href="#" class="flex items-center gap-3 p-2 rounded-lg bg-gray-100 font-medium"><div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center"><i class="fa-solid fa-border-all"></i></div> Todos los servicios</a></li>
+                    <li><a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-bolt text-[#202124]"></i></div> Electricista</a></li>
+                    <li><a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-wrench text-[#202124]"></i></div> Plomero</a></li>
+                    <li><a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-trowel-bricks text-[#202124]"></i></div> Albañil</a></li>
+                    <li><a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-paint-roller text-[#202124]"></i></div> Pintor</a></li>
+                    <li><a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-leaf text-[#202124]"></i></div> Jardinero</a></li>
+                    <li><a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-car-side text-[#202124]"></i></div> Mecánico</a></li>
+                    <li><a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-stethoscope text-[#202124]"></i></div> Salud y Médicos</a></li>
+                    <li><a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-van-shuttle text-[#202124]"></i></div> Traslados</a></li>
+                </ul>
 
+                <!-- Filtros -->
+                <div class="mt-6 border-t border-gray-200 pt-4 px-2">
+                    <h3 class="font-bold text-gray-900 mb-3 text-sm">Filtros</h3>
+                    <label class="flex items-center gap-2 mb-2 text-sm text-gray-700 cursor-pointer">
+                        <input type="checkbox" class="rounded text-[#35D07F] focus:ring-[#35D07F]"> Solo perfiles con 5 estrellas
+                    </label>
+                    <label class="flex items-center gap-2 mb-2 text-sm text-gray-700 cursor-pointer">
+                        <input type="checkbox" class="rounded text-[#35D07F] focus:ring-[#35D07F]"> Acepta pago con Débito
+                    </label>
+                </div>
+            </div>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL (El Feed de Servicios) -->
+        <main class="flex-1 overflow-y-auto p-4 sm:p-6 bg-[#F5F5F5]">
+            <div class="max-w-7xl mx-auto">
+                <h1 class="text-2xl font-bold mb-6">Sugerencias para vos</h1>
+                
+                <!-- Grilla de Tarjetas -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    
+                    <!-- Tarjeta de Servicio 1 (Destacado) -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-200 cursor-pointer group relative">
+                        <div class="absolute top-2 left-2 bg-[#35D07F] text-[#202124] text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10 uppercase tracking-wide">
+                            Destacado
+                        </div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=500&q=80" alt="Trabajo Plomeria" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <!-- Foto de perfil superpuesta -->
+                            <div class="absolute -bottom-4 right-4 w-12 h-12 rounded-full border-2 border-white overflow-hidden shadow-sm">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <div class="p-4 pt-5">
+                            <div class="flex justify-between items-start mb-1">
+                                <h3 class="font-bold text-lg text-[#202124] leading-tight">Juan Pérez</h3>
+                                <div class="flex items-center text-sm font-bold text-gray-700"><i class="fa-solid fa-star text-yellow-400 text-xs mr-1"></i> 4.9</div>
+                            </div>
+                            <p class="text-sm font-semibold text-[#35D07F] mb-1">Plomero Matriculado</p>
+                            <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-location-dot mr-1"></i> A 2.5 km de tu ubicación</p>
+                            <p class="text-sm text-gray-600 line-clamp-2">Reparación de cañerías, destapes urgentes y termotanques. Presupuesto sin cargo en el centro.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de Servicio 2 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-200 cursor-pointer group">
+                        <div class="h-48 overflow-hidden relative bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1574359411659-15573a27fd0c?auto=format&fit=crop&w=500&q=80" alt="Médico" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute -bottom-4 right-4 w-12 h-12 rounded-full border-2 border-white overflow-hidden shadow-sm">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <div class="p-4 pt-5">
+                            <div class="flex justify-between items-start mb-1">
+                                <h3 class="font-bold text-lg text-[#202124] leading-tight">Dra. Laura Gómez</h3>
+                                <div class="flex items-center text-sm font-bold text-gray-700"><i class="fa-solid fa-star text-yellow-400 text-xs mr-1"></i> 5.0</div>
+                            </div>
+                            <p class="text-sm font-semibold text-[#35D07F] mb-1">Médica Pediatra a Domicilio</p>
+                            <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-location-dot mr-1"></i> Atención en toda la provincia</p>
+                            <p class="text-sm text-gray-600 line-clamp-2">Atención médica pediátrica particular. Acepta pago con tarjeta de débito y GO Cuotas.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de Servicio 3 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-200 cursor-pointer group">
+                        <div class="h-48 overflow-hidden relative bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=500&q=80" alt="Albañil" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute -bottom-4 right-4 w-12 h-12 rounded-full border-2 border-white overflow-hidden shadow-sm">
+                                <img src="https://randomuser.me/api/portraits/men/22.jpg" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <div class="p-4 pt-5">
+                            <div class="flex justify-between items-start mb-1">
+                                <h3 class="font-bold text-lg text-[#202124] leading-tight">Roberto Sánchez</h3>
+                                <div class="flex items-center text-sm font-bold text-gray-700"><i class="fa-solid fa-star text-yellow-400 text-xs mr-1"></i> 4.5</div>
+                            </div>
+                            <p class="text-sm font-semibold text-[#35D07F] mb-1">Obras y Refacciones</p>
+                            <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-location-dot mr-1"></i> A 5 km de tu ubicación</p>
+                            <p class="text-sm text-gray-600 line-clamp-2">Especialista en albañilería general, colocación de cerámicos y trabajos de pintura interior/exterior.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de Servicio 4 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-200 cursor-pointer group">
+                        <div class="h-48 overflow-hidden relative bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1597773150796-e5c14ebecbf5?auto=format&fit=crop&w=500&q=80" alt="Electricista" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute -bottom-4 right-4 w-12 h-12 rounded-full border-2 border-white overflow-hidden shadow-sm">
+                                <img src="https://randomuser.me/api/portraits/men/62.jpg" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <div class="p-4 pt-5">
+                            <div class="flex justify-between items-start mb-1">
+                                <h3 class="font-bold text-lg text-[#202124] leading-tight">Carlos Ruiz</h3>
+                                <div class="flex items-center text-sm font-bold text-gray-700"><i class="fa-solid fa-star text-yellow-400 text-xs mr-1"></i> 4.8</div>
+                            </div>
+                            <p class="text-sm font-semibold text-[#35D07F] mb-1">Electricista Industrial y Hogar</p>
+                            <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-location-dot mr-1"></i> A 1 km de tu ubicación</p>
+                            <p class="text-sm text-gray-600 line-clamp-2">Solución a cortocircuitos urgentes 24hs. Instalación de luminarias y cableado a nuevo.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+    </div>
 </body>
 </html>
