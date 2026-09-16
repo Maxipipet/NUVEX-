@@ -11,44 +11,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
-        /* Ocultar scrollbar visualmente pero permitir scroll */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-[#F5F5F5] text-[#202124] h-screen flex flex-col overflow-hidden">
+<body class="bg-[#F5F5F5] text-[#202124] h-screen flex flex-col overflow-hidden relative">
 
-    <!-- BARRA SUPERIOR (Estilo Facebook) -->
-    <header class="bg-white h-16 border-b border-gray-200 flex items-center justify-between px-4 sticky top-0 z-50 shrink-0 shadow-sm">
-        
-        <!-- Zona Izquierda: LOGO -->
+    <!-- BARRA SUPERIOR -->
+    <header class="bg-white h-16 border-b border-gray-200 flex items-center justify-between px-4 sticky top-0 z-40 shrink-0 shadow-sm">
         <div class="flex items-center w-1/4">
-            <a href="#" class="flex items-center">
-                <!-- Acá va tu logo.jpeg con el fondo blanco fusionado -->
+            <a href="#" onclick="filtrarCategoria('Todos')" class="flex items-center">
                 <img src="logo.jpeg" alt="NUVEX" class="h-10 mix-blend-multiply object-contain">
             </a>
         </div>
 
-        <!-- Zona Central: BUSCADOR -->
+        <!-- BUSCADOR INTERACTIVO -->
         <div class="flex-1 max-w-2xl flex justify-center">
             <div class="relative w-full">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
                 </div>
-                <input type="text" class="block w-full pl-10 pr-3 py-2.5 bg-gray-100 border-none rounded-full text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#35D07F] transition-shadow" placeholder="¿Qué servicio necesitás hoy? (Ej. Electricista, Flete, Médico)">
+                <input type="text" id="buscador" onkeyup="buscarServicios()" class="block w-full pl-10 pr-3 py-2.5 bg-gray-100 border-none rounded-full text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#35D07F] transition-shadow" placeholder="¿Qué servicio necesitás hoy? (Ej. Electricista, Médico)">
             </div>
         </div>
 
-        <!-- Zona Derecha: MENÚ DE USUARIO -->
         <div class="flex items-center justify-end w-1/4 gap-3">
             <button class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-700 transition">
                 <i class="fa-solid fa-bell"></i>
             </button>
-            <button class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-700 transition">
-                <i class="fa-brands fa-facebook-messenger"></i>
-            </button>
             <div class="ml-2 w-10 h-10 rounded-full bg-[#202124] border-2 border-[#35D07F] overflow-hidden cursor-pointer">
-                <img src="https://ui-avatars.com/api/?name=Maxi+Pipet&background=202124&color=35D07F" alt="Perfil" class="w-full h-full object-cover">
+                <img src="https://ui-avatars.com/api/?name=Usuario&background=202124&color=35D07F" alt="Perfil" class="w-full h-full object-cover">
             </div>
         </div>
     </header>
@@ -56,15 +48,15 @@
     <!-- CUERPO PRINCIPAL -->
     <div class="flex flex-1 overflow-hidden">
         
-        <!-- BARRA LATERAL IZQUIERDA (Filtros y Categorías) -->
+        <!-- BARRA LATERAL (Categorías Clickables) -->
         <aside class="w-80 bg-white border-r border-gray-200 flex flex-col hidden md:flex shrink-0 z-10 shadow-[4px_0_15px_-10px_rgba(0,0,0,0.1)]">
             <div class="p-4 border-b border-gray-200">
                 <h2 class="text-xl font-bold text-[#202124]">Marketplace</h2>
             </div>
             
             <div class="p-4 overflow-y-auto no-scrollbar flex-1">
-                <!-- Botones de Acción -->
-                <button class="w-full flex items-center gap-3 bg-[#35D07F]/10 text-[#202124] hover:bg-[#35D07F]/20 p-3 rounded-lg font-semibold transition mb-4">
+                <!-- Botón de Publicar (Abre Modal) -->
+                <button onclick="abrirModalPublicar()" class="w-full flex items-center gap-3 bg-[#35D07F]/10 text-[#202124] hover:bg-[#35D07F]/20 p-3 rounded-lg font-bold transition mb-4">
                     <div class="bg-[#35D07F] text-[#202124] w-8 h-8 rounded-full flex items-center justify-center"><i class="fa-solid fa-plus"></i></div>
                     Publicar un Servicio
                 </button>
@@ -72,122 +64,261 @@
                 <!-- Categorías -->
                 <h3 class="font-bold text-gray-900 mb-3 text-sm px-2">Categorías</h3>
                 <ul class="space-y-1">
-                    <li><a href="#" class="flex items-center gap-3 p-2 rounded-lg bg-gray-100 font-medium"><div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center"><i class="fa-solid fa-border-all"></i></div> Todos los servicios</a></li>
-                    <li><a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-bolt text-[#202124]"></i></div> Electricista</a></li>
-                    <li><a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-wrench text-[#202124]"></i></div> Plomero</a></li>
-                    <li><a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-trowel-bricks text-[#202124]"></i></div> Albañil</a></li>
-                    <li><a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-paint-roller text-[#202124]"></i></div> Pintor</a></li>
-                    <li><a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-leaf text-[#202124]"></i></div> Jardinero</a></li>
-                    <li><a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-car-side text-[#202124]"></i></div> Mecánico</a></li>
-                    <li><a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-stethoscope text-[#202124]"></i></div> Salud y Médicos</a></li>
-                    <li><a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-van-shuttle text-[#202124]"></i></div> Traslados</a></li>
+                    <li><button onclick="filtrarCategoria('Todos')" class="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 font-medium transition text-left"><div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center"><i class="fa-solid fa-border-all"></i></div> Todos los servicios</button></li>
+                    <li><button onclick="filtrarCategoria('Electricista')" class="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition text-left"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-bolt text-[#202124]"></i></div> Electricista</button></li>
+                    <li><button onclick="filtrarCategoria('Plomero')" class="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition text-left"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-wrench text-[#202124]"></i></div> Plomero</button></li>
+                    <li><button onclick="filtrarCategoria('Albañil')" class="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition text-left"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-trowel-bricks text-[#202124]"></i></div> Albañil</button></li>
+                    <li><button onclick="filtrarCategoria('Médico')" class="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition text-left"><div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-stethoscope text-[#202124]"></i></div> Salud y Médicos</button></li>
                 </ul>
-
-                <!-- Filtros -->
-                <div class="mt-6 border-t border-gray-200 pt-4 px-2">
-                    <h3 class="font-bold text-gray-900 mb-3 text-sm">Filtros</h3>
-                    <label class="flex items-center gap-2 mb-2 text-sm text-gray-700 cursor-pointer">
-                        <input type="checkbox" class="rounded text-[#35D07F] focus:ring-[#35D07F]"> Solo perfiles con 5 estrellas
-                    </label>
-                    <label class="flex items-center gap-2 mb-2 text-sm text-gray-700 cursor-pointer">
-                        <input type="checkbox" class="rounded text-[#35D07F] focus:ring-[#35D07F]"> Acepta pago con Débito
-                    </label>
-                </div>
             </div>
         </aside>
 
-        <!-- CONTENIDO PRINCIPAL (El Feed de Servicios) -->
-        <main class="flex-1 overflow-y-auto p-4 sm:p-6 bg-[#F5F5F5]">
-            <div class="max-w-7xl mx-auto">
-                <h1 class="text-2xl font-bold mb-6">Sugerencias para vos</h1>
-                
-                <!-- Grilla de Tarjetas -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                    
-                    <!-- Tarjeta de Servicio 1 (Destacado) -->
-                    <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-200 cursor-pointer group relative">
-                        <div class="absolute top-2 left-2 bg-[#35D07F] text-[#202124] text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10 uppercase tracking-wide">
-                            Destacado
-                        </div>
-                        <div class="h-48 overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=500&q=80" alt="Trabajo Plomeria" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <!-- Foto de perfil superpuesta -->
-                            <div class="absolute -bottom-4 right-4 w-12 h-12 rounded-full border-2 border-white overflow-hidden shadow-sm">
-                                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                        <div class="p-4 pt-5">
-                            <div class="flex justify-between items-start mb-1">
-                                <h3 class="font-bold text-lg text-[#202124] leading-tight">Juan Pérez</h3>
-                                <div class="flex items-center text-sm font-bold text-gray-700"><i class="fa-solid fa-star text-yellow-400 text-xs mr-1"></i> 4.9</div>
-                            </div>
-                            <p class="text-sm font-semibold text-[#35D07F] mb-1">Plomero Matriculado</p>
-                            <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-location-dot mr-1"></i> A 2.5 km de tu ubicación</p>
-                            <p class="text-sm text-gray-600 line-clamp-2">Reparación de cañerías, destapes urgentes y termotanques. Presupuesto sin cargo en el centro.</p>
-                        </div>
-                    </div>
-
-                    <!-- Tarjeta de Servicio 2 -->
-                    <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-200 cursor-pointer group">
-                        <div class="h-48 overflow-hidden relative bg-gray-100">
-                            <img src="https://images.unsplash.com/photo-1574359411659-15573a27fd0c?auto=format&fit=crop&w=500&q=80" alt="Médico" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <div class="absolute -bottom-4 right-4 w-12 h-12 rounded-full border-2 border-white overflow-hidden shadow-sm">
-                                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                        <div class="p-4 pt-5">
-                            <div class="flex justify-between items-start mb-1">
-                                <h3 class="font-bold text-lg text-[#202124] leading-tight">Dra. Laura Gómez</h3>
-                                <div class="flex items-center text-sm font-bold text-gray-700"><i class="fa-solid fa-star text-yellow-400 text-xs mr-1"></i> 5.0</div>
-                            </div>
-                            <p class="text-sm font-semibold text-[#35D07F] mb-1">Médica Pediatra a Domicilio</p>
-                            <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-location-dot mr-1"></i> Atención en toda la provincia</p>
-                            <p class="text-sm text-gray-600 line-clamp-2">Atención médica pediátrica particular. Acepta pago con tarjeta de débito y GO Cuotas.</p>
-                        </div>
-                    </div>
-
-                    <!-- Tarjeta de Servicio 3 -->
-                    <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-200 cursor-pointer group">
-                        <div class="h-48 overflow-hidden relative bg-gray-100">
-                            <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=500&q=80" alt="Albañil" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <div class="absolute -bottom-4 right-4 w-12 h-12 rounded-full border-2 border-white overflow-hidden shadow-sm">
-                                <img src="https://randomuser.me/api/portraits/men/22.jpg" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                        <div class="p-4 pt-5">
-                            <div class="flex justify-between items-start mb-1">
-                                <h3 class="font-bold text-lg text-[#202124] leading-tight">Roberto Sánchez</h3>
-                                <div class="flex items-center text-sm font-bold text-gray-700"><i class="fa-solid fa-star text-yellow-400 text-xs mr-1"></i> 4.5</div>
-                            </div>
-                            <p class="text-sm font-semibold text-[#35D07F] mb-1">Obras y Refacciones</p>
-                            <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-location-dot mr-1"></i> A 5 km de tu ubicación</p>
-                            <p class="text-sm text-gray-600 line-clamp-2">Especialista en albañilería general, colocación de cerámicos y trabajos de pintura interior/exterior.</p>
-                        </div>
-                    </div>
-
-                    <!-- Tarjeta de Servicio 4 -->
-                    <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-200 cursor-pointer group">
-                        <div class="h-48 overflow-hidden relative bg-gray-100">
-                            <img src="https://images.unsplash.com/photo-1597773150796-e5c14ebecbf5?auto=format&fit=crop&w=500&q=80" alt="Electricista" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <div class="absolute -bottom-4 right-4 w-12 h-12 rounded-full border-2 border-white overflow-hidden shadow-sm">
-                                <img src="https://randomuser.me/api/portraits/men/62.jpg" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                        <div class="p-4 pt-5">
-                            <div class="flex justify-between items-start mb-1">
-                                <h3 class="font-bold text-lg text-[#202124] leading-tight">Carlos Ruiz</h3>
-                                <div class="flex items-center text-sm font-bold text-gray-700"><i class="fa-solid fa-star text-yellow-400 text-xs mr-1"></i> 4.8</div>
-                            </div>
-                            <p class="text-sm font-semibold text-[#35D07F] mb-1">Electricista Industrial y Hogar</p>
-                            <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-location-dot mr-1"></i> A 1 km de tu ubicación</p>
-                            <p class="text-sm text-gray-600 line-clamp-2">Solución a cortocircuitos urgentes 24hs. Instalación de luminarias y cableado a nuevo.</p>
-                        </div>
-                    </div>
-
-                </div>
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="flex-1 overflow-y-auto p-4 sm:p-6 bg-[#F5F5F5]" id="contenedor-principal">
+            <h1 class="text-2xl font-bold mb-6" id="titulo-resultados">Sugerencias para vos</h1>
+            <!-- Grilla donde se inyectan las tarjetas con JavaScript -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="grilla-servicios">
+                <!-- Se llena dinámicamente -->
             </div>
         </main>
-
     </div>
+
+    <!-- ============================================== -->
+    <!-- MODAL: PERFIL DEL PRESTADOR -->
+    <!-- ============================================== -->
+    <div id="modal-perfil" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300" id="modal-perfil-content">
+            <div class="relative h-48 bg-gray-200">
+                <img id="mp-foto-trabajo" src="" class="w-full h-full object-cover">
+                <button onclick="cerrarModal('modal-perfil')" class="absolute top-4 right-4 bg-[#202124]/50 hover:bg-[#202124] text-white w-8 h-8 rounded-full flex items-center justify-center transition backdrop-blur-sm">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="px-6 pb-6 pt-2 relative">
+                <div class="absolute -top-12 left-6 w-24 h-24 rounded-full border-4 border-white overflow-hidden shadow-md">
+                    <img id="mp-foto-perfil" src="" class="w-full h-full object-cover">
+                </div>
+                <div class="mt-14">
+                    <div class="flex justify-between items-end">
+                        <h2 id="mp-nombre" class="text-2xl font-bold text-[#202124]"></h2>
+                        <span id="mp-rating" class="text-lg font-bold text-gray-700 bg-gray-100 px-3 py-1 rounded-full"><i class="fa-solid fa-star text-yellow-400 mr-1"></i></span>
+                    </div>
+                    <p id="mp-oficio" class="text-[#35D07F] font-bold text-lg mb-2"></p>
+                    <p class="text-gray-500 text-sm mb-4"><i class="fa-solid fa-location-dot mr-1"></i> <span id="mp-ubicacion"></span></p>
+                    
+                    <h3 class="font-bold text-gray-900 mb-1">Descripción del Servicio</h3>
+                    <p id="mp-descripcion" class="text-gray-600 text-sm leading-relaxed mb-6"></p>
+                    
+                    <button class="w-full bg-[#35D07F] hover:bg-[#2bc472] text-[#202124] font-bold py-3 rounded-xl shadow-md transition flex justify-center items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-xl"></i> Contactar por WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- MODAL: PUBLICAR SERVICIO -->
+    <!-- ============================================== -->
+    <div id="modal-publicar" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300" id="modal-publicar-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-[#202124]">Publicar Servicio</h2>
+                <button onclick="cerrarModal('modal-publicar')" class="text-gray-400 hover:text-[#202124] transition"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <form onsubmit="event.preventDefault(); alert('¡Servicio publicado con éxito!'); cerrarModal('modal-publicar');" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Título del Servicio</label>
+                    <input type="text" required placeholder="Ej. Electricista a domicilio" class="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#35D07F] outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Categoría</label>
+                    <select required class="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#35D07F] outline-none bg-white">
+                        <option>Electricista</option><option>Plomero</option><option>Albañil</option><option>Médico</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Descripción corta</label>
+                    <textarea required rows="3" placeholder="Contanos qué hacés..." class="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#35D07F] outline-none"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-[#202124] hover:bg-black text-[#35D07F] font-bold py-3 rounded-xl shadow-md transition mt-4">
+                    Publicar Ahora
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- SCRIPTS MÁGICOS (JavaScript) -->
+    <!-- ============================================== -->
+    <script>
+        // 1. BASE DE DATOS FICTICIA DE PRESTADORES
+        const servicios = [
+            {
+                id: 1,
+                nombre: "Juan Pérez",
+                oficio: "Plomero Matriculado",
+                categoria: "Plomero",
+                rating: "4.9",
+                ubicacion: "A 2.5 km de tu ubicación",
+                descripcion: "Reparación de cañerías, destapes urgentes y termotanques. Presupuesto sin cargo en el centro. Acepto GO Cuotas.",
+                fotoTrabajo: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=500&q=80",
+                fotoPerfil: "https://randomuser.me/api/portraits/men/32.jpg",
+                destacado: true
+            },
+            {
+                id: 2,
+                nombre: "Dra. Laura Gómez",
+                oficio: "Médica Pediatra",
+                categoria: "Médico",
+                rating: "5.0",
+                ubicacion: "Atención a Domicilio",
+                descripcion: "Atención médica pediátrica particular. Diagnósticos rápidos y recetas digitales. Acepta pago con tarjeta de débito.",
+                fotoTrabajo: "https://images.unsplash.com/photo-1574359411659-15573a27fd0c?auto=format&fit=crop&w=500&q=80",
+                fotoPerfil: "https://randomuser.me/api/portraits/women/44.jpg",
+                destacado: false
+            },
+            {
+                id: 3,
+                nombre: "Roberto Sánchez",
+                oficio: "Obras y Refacciones",
+                categoria: "Albañil",
+                rating: "4.5",
+                ubicacion: "A 5 km de tu ubicación",
+                descripcion: "Especialista en albañilería general, colocación de cerámicos y trabajos de pintura interior/exterior.",
+                fotoTrabajo: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=500&q=80",
+                fotoPerfil: "https://randomuser.me/api/portraits/men/22.jpg",
+                destacado: false
+            },
+            {
+                id: 4,
+                nombre: "Carlos Ruiz",
+                oficio: "Electricista Industrial",
+                categoria: "Electricista",
+                rating: "4.8",
+                ubicacion: "A 1 km de tu ubicación",
+                descripcion: "Solución a cortocircuitos urgentes 24hs. Instalación de luminarias y cableado a nuevo. Presupuesto en el acto.",
+                fotoTrabajo: "https://images.unsplash.com/photo-1597773150796-e5c14ebecbf5?auto=format&fit=crop&w=500&q=80",
+                fotoPerfil: "https://randomuser.me/api/portraits/men/62.jpg",
+                destacado: false
+            }
+        ];
+
+        const contenedorGrilla = document.getElementById('grilla-servicios');
+
+        // 2. FUNCIÓN PARA DIBUJAR LAS TARJETAS
+        function renderizarTarjetas(datos) {
+            contenedorGrilla.innerHTML = ''; // Limpiar grilla
+            if(datos.length === 0) {
+                contenedorGrilla.innerHTML = '<p class="text-gray-500 col-span-full">No se encontraron servicios.</p>';
+                return;
+            }
+            
+            datos.forEach(srv => {
+                const tarjeta = document.createElement('div');
+                tarjeta.className = "bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-200 cursor-pointer group relative";
+                tarjeta.onclick = () => abrirPerfil(srv.id); // Hacer la tarjeta clickeable
+                
+                const badgeDestacado = srv.destacado ? `<div class="absolute top-2 left-2 bg-[#35D07F] text-[#202124] text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10 uppercase tracking-wide">Destacado</div>` : '';
+
+                tarjeta.innerHTML = `
+                    ${badgeDestacado}
+                    <div class="h-48 overflow-hidden relative bg-gray-100">
+                        <img src="${srv.fotoTrabajo}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute -bottom-4 right-4 w-12 h-12 rounded-full border-2 border-white overflow-hidden shadow-sm">
+                            <img src="${srv.fotoPerfil}" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="p-4 pt-5">
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="font-bold text-lg text-[#202124] leading-tight">${srv.nombre}</h3>
+                            <div class="flex items-center text-sm font-bold text-gray-700"><i class="fa-solid fa-star text-yellow-400 text-xs mr-1"></i> ${srv.rating}</div>
+                        </div>
+                        <p class="text-sm font-semibold text-[#35D07F] mb-1">${srv.oficio}</p>
+                        <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-location-dot mr-1"></i> ${srv.ubicacion}</p>
+                        <p class="text-sm text-gray-600 line-clamp-2">${srv.descripcion}</p>
+                    </div>
+                `;
+                contenedorGrilla.appendChild(tarjeta);
+            });
+        }
+
+        // Inicializar tarjetas al cargar la página
+        renderizarTarjetas(servicios);
+
+        // 3. BUSCADOR INTERACTIVO
+        function buscarServicios() {
+            const textoBuscado = document.getElementById('buscador').value.toLowerCase();
+            const resultados = servicios.filter(srv => 
+                srv.oficio.toLowerCase().includes(textoBuscado) || 
+                srv.categoria.toLowerCase().includes(textoBuscado) || 
+                srv.nombre.toLowerCase().includes(textoBuscado)
+            );
+            document.getElementById('titulo-resultados').innerText = textoBuscado === '' ? 'Sugerencias para vos' : 'Resultados de búsqueda';
+            renderizarTarjetas(resultados);
+        }
+
+        // 4. FILTRO DE BARRA LATERAL (Categorías)
+        function filtrarCategoria(categoria) {
+            document.getElementById('buscador').value = ''; // Limpiar buscador
+            if(categoria === 'Todos') {
+                document.getElementById('titulo-resultados').innerText = 'Sugerencias para vos';
+                renderizarTarjetas(servicios);
+            } else {
+                document.getElementById('titulo-resultados').innerText = `Servicios de ${categoria}`;
+                const resultados = servicios.filter(srv => srv.categoria === categoria);
+                renderizarTarjetas(resultados);
+            }
+        }
+
+        // 5. MANEJO DE VENTANAS EMERGENTES (MODALES)
+        function abrirPerfil(id) {
+            const srv = servicios.find(s => s.id === id);
+            
+            // Llenar datos del modal
+            document.getElementById('mp-foto-trabajo').src = srv.fotoTrabajo;
+            document.getElementById('mp-foto-perfil').src = srv.fotoPerfil;
+            document.getElementById('mp-nombre').innerText = srv.nombre;
+            document.getElementById('mp-rating').innerHTML = `<i class="fa-solid fa-star text-yellow-400 mr-1"></i> ${srv.rating}`;
+            document.getElementById('mp-oficio').innerText = srv.oficio;
+            document.getElementById('mp-ubicacion').innerText = srv.ubicacion;
+            document.getElementById('mp-descripcion').innerText = srv.descripcion;
+
+            // Mostrar Modal con animación
+            const modal = document.getElementById('modal-perfil');
+            const content = document.getElementById('modal-perfil-content');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function abrirModalPublicar() {
+            const modal = document.getElementById('modal-publicar');
+            const content = document.getElementById('modal-publicar-content');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function cerrarModal(idModal) {
+            const modal = document.getElementById(idModal);
+            const content = document.getElementById(`${idModal}-content`);
+            modal.classList.add('opacity-0');
+            content.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Cerrar modales haciendo click afuera del contenido
+        window.onclick = function(event) {
+            if (event.target === document.getElementById('modal-perfil')) cerrarModal('modal-perfil');
+            if (event.target === document.getElementById('modal-publicar')) cerrarModal('modal-publicar');
+        }
+    </script>
 </body>
 </html>
