@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NUVEX | Marketplace de Servicios Premium</title>
+    <title>NUVEX | Marketplace de Servicios Seguro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,49 +12,39 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .glass-effect { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
-        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
     </style>
 </head>
 <body class="bg-[#F8F9FA] text-[#202124] h-screen flex flex-col overflow-hidden">
 
-    <!-- BARRA SUPERIOR PRO -->
+    <!-- BARRA SUPERIOR -->
     <header class="glass-effect h-20 border-b border-gray-200 flex items-center justify-between px-6 sticky top-0 z-50 shrink-0">
-        
-        <!-- Zona Izquierda: LOGO -->
         <div class="flex items-center w-1/4">
             <a href="#" onclick="filtrarCategoria('Todos')" class="flex items-center">
                 <img src="logo.jpeg" alt="NUVEX" class="h-12 mix-blend-multiply object-contain">
             </a>
         </div>
 
-        <!-- Zona Central: BUSCADOR AVANZADO -->
         <div class="flex-1 max-w-3xl flex justify-center">
             <div class="flex w-full bg-white border border-gray-200 rounded-full shadow-sm hover:shadow-md transition-shadow overflow-hidden p-1">
-                <!-- Ubicación -->
                 <button class="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 rounded-full transition text-sm font-semibold border-r border-gray-200">
-                    <i class="fa-solid fa-location-dot text-[#35D07F]"></i> Corrientes, Cap.
+                    <i class="fa-solid fa-location-dot text-[#35D07F]"></i> Argentina (Detectado)
                 </button>
-                <!-- Buscador de texto -->
                 <div class="relative flex-1">
-                    <input type="text" id="buscador" onkeyup="buscarServicios()" class="w-full h-full pl-4 pr-3 py-2 bg-transparent border-none text-sm placeholder-gray-500 focus:outline-none" placeholder="¿Qué estás buscando? (Ej. Electricista)">
+                    <input type="text" id="buscador" onkeyup="buscarServicios()" class="w-full h-full pl-4 pr-3 py-2 bg-transparent border-none text-sm placeholder-gray-500 focus:outline-none" placeholder="¿Qué servicio necesitás? (Ej. Electricista, Médico)">
                 </div>
-                <!-- Botón buscar -->
                 <button class="bg-[#202124] hover:bg-black text-white w-10 h-10 rounded-full flex items-center justify-center transition">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Zona Derecha: MENÚ DE USUARIO -->
         <div class="flex items-center justify-end w-1/4 gap-4">
-            <button class="font-semibold text-sm hover:text-[#35D07F] transition">Ser Prestador</button>
-            <div class="h-6 w-px bg-gray-300"></div>
-            <button class="relative w-10 h-10 rounded-full bg-white border border-gray-200 hover:bg-gray-50 flex items-center justify-center text-gray-700 transition shadow-sm">
-                <i class="fa-regular fa-bell"></i>
-                <span class="absolute top-0 right-0 w-3 h-3 bg-red-500 border-2 border-white rounded-full"></span>
+            <button onclick="abrirModalVerificacion()" class="text-xs font-bold bg-blue-50 text-blue-600 border border-blue-200 px-3 py-2 rounded-xl hover:bg-blue-100 transition">
+                <i class="fa-solid fa-shield-halved mr-1"></i> Verificarse
             </button>
             <div class="w-10 h-10 rounded-full bg-[#202124] border-2 border-[#35D07F] overflow-hidden cursor-pointer shadow-sm">
-                <img src="https://ui-avatars.com/api/?name=Usuario&background=202124&color=35D07F" alt="Perfil" class="w-full h-full object-cover">
+                <img src="https://ui-avatars.com/api/?name=Usuario&background=202124&color=35D07F" class="w-full h-full object-cover">
             </div>
         </div>
     </header>
@@ -62,137 +52,104 @@
     <!-- CUERPO PRINCIPAL -->
     <div class="flex flex-1 overflow-hidden">
         
-        <!-- BARRA LATERAL (Filtros Comerciales) -->
+        <!-- SIDEBAR -->
         <aside class="w-72 bg-white flex flex-col hidden md:flex shrink-0 z-10 shadow-[4px_0_24px_rgba(0,0,0,0.02)]">
             <div class="p-5 overflow-y-auto no-scrollbar flex-1">
-                
-                <h3 class="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Explorar Categorías</h3>
+                <h3 class="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Categorías</h3>
                 <ul class="space-y-1.5 mb-8">
-                    <li><button onclick="filtrarCategoria('Todos')" class="w-full flex items-center gap-3 p-2.5 rounded-xl hover:bg-gray-50 font-semibold transition text-left text-sm text-gray-700"><div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-border-all text-[#202124]"></i></div> Todos los servicios</button></li>
+                    <li><button onclick="filtrarCategoria('Todos')" class="w-full flex items-center gap-3 p-2.5 rounded-xl hover:bg-gray-50 font-semibold transition text-left text-sm text-gray-700"><div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-border-all text-[#202124]"></i></div> Todos</button></li>
                     <li><button onclick="filtrarCategoria('Electricista')" class="w-full flex items-center gap-3 p-2.5 rounded-xl hover:bg-gray-50 font-semibold transition text-left text-sm text-gray-700"><div class="w-8 h-8 rounded-lg bg-[#35D07F]/10 flex items-center justify-center"><i class="fa-solid fa-bolt text-[#35D07F]"></i></div> Electricistas</button></li>
                     <li><button onclick="filtrarCategoria('Plomero')" class="w-full flex items-center gap-3 p-2.5 rounded-xl hover:bg-gray-50 font-semibold transition text-left text-sm text-gray-700"><div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center"><i class="fa-solid fa-wrench text-blue-500"></i></div> Plomeros</button></li>
-                    <li><button onclick="filtrarCategoria('Albañil')" class="w-full flex items-center gap-3 p-2.5 rounded-xl hover:bg-gray-50 font-semibold transition text-left text-sm text-gray-700"><div class="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center"><i class="fa-solid fa-trowel-bricks text-orange-500"></i></div> Albañiles</button></li>
+                    <li><button onclick="filtrarCategoria('Médico')" class="w-full flex items-center gap-3 p-2.5 rounded-xl hover:bg-gray-50 font-semibold transition text-left text-sm text-gray-700"><div class="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center"><i class="fa-solid fa-stethoscope text-green-600"></i></div> Salud y Médicos</button></li>
                 </ul>
-
-                <h3 class="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wider">Métodos de Pago</h3>
-                <div class="space-y-3 mb-8">
-                    <label class="flex items-center gap-3 text-sm text-gray-700 font-medium cursor-pointer">
-                        <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-[#35D07F] focus:ring-[#35D07F]"> 
-                        Acepta GO Cuotas
-                    </label>
-                    <label class="flex items-center gap-3 text-sm text-gray-700 font-medium cursor-pointer">
-                        <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-[#35D07F] focus:ring-[#35D07F]"> 
-                        Ualá / Claro Pay
-                    </label>
-                    <label class="flex items-center gap-3 text-sm text-gray-700 font-medium cursor-pointer">
-                        <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-[#35D07F] focus:ring-[#35D07F]"> 
-                        MercadoPago
-                    </label>
-                </div>
             </div>
-            
-            <!-- Banner Inferior Sidebar -->
             <div class="p-5 border-t border-gray-100">
                 <div class="bg-[#202124] rounded-2xl p-4 text-white relative overflow-hidden">
-                    <div class="absolute -right-4 -top-4 w-20 h-20 bg-[#35D07F] rounded-full blur-2xl opacity-40"></div>
-                    <h4 class="font-bold text-lg mb-1 relative z-10">Generá ingresos</h4>
-                    <p class="text-xs text-gray-400 mb-3 relative z-10">Ofrecé tus servicios a miles de clientes.</p>
-                    <button onclick="abrirModalPublicar()" class="w-full bg-[#35D07F] text-[#202124] text-sm font-bold py-2 rounded-xl relative z-10 hover:bg-[#2bc472] transition">Publicar Anuncio</button>
+                    <h4 class="font-bold text-lg mb-1">Suscripción Premium</h4>
+                    <p class="text-xs text-gray-400 mb-3">Destacá tu anuncio por $500.000 ARS / mes.</p>
+                    <button onclick="abrirModalPublicar()" class="w-full bg-[#35D07F] text-[#202124] text-sm font-bold py-2 rounded-xl hover:bg-[#2bc472] transition">Publicar Anuncio</button>
                 </div>
             </div>
         </aside>
 
-        <!-- CONTENIDO PRINCIPAL -->
-        <main class="flex-1 overflow-y-auto p-4 sm:p-8" id="contenedor-principal">
+        <!-- GRILLA -->
+        <main class="flex-1 overflow-y-auto p-4 sm:p-8">
             <div class="max-w-7xl mx-auto">
-                
-                <!-- Banner Promocional -->
-                <div class="w-full bg-gradient-to-r from-[#202124] to-gray-800 rounded-3xl p-8 mb-8 flex items-center justify-between shadow-lg relative overflow-hidden">
-                    <div class="relative z-10">
-                        <span class="bg-[#35D07F] text-[#202124] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Nuevo</span>
-                        <h2 class="text-3xl font-extrabold text-white mt-3 mb-2">Renová tu hogar en cuotas</h2>
-                        <p class="text-gray-300 font-medium">Pagá pintores y albañiles con tarjeta de débito en hasta 3 pagos.</p>
-                    </div>
-                    <div class="hidden md:block relative z-10 text-right">
-                        <button class="bg-white text-[#202124] font-bold px-6 py-3 rounded-xl hover:bg-gray-100 transition shadow-md">Ver Profesionales</button>
-                    </div>
-                    <i class="fa-solid fa-paint-roller absolute -right-10 -bottom-10 text-9xl text-white opacity-5 transform -rotate-12"></i>
-                </div>
-
                 <div class="flex items-center justify-between mb-6">
-                    <h1 class="text-2xl font-extrabold text-[#202124]" id="titulo-resultados">Recomendados para vos</h1>
-                    <select class="bg-transparent text-sm font-semibold text-gray-600 focus:outline-none cursor-pointer">
-                        <option>Ordenar por: Relevancia</option>
-                        <option>Mayor calificación</option>
-                        <option>Menor precio</option>
-                    </select>
+                    <h1 class="text-2xl font-extrabold text-[#202124]" id="titulo-resultados">Profesionales Verificados</h1>
                 </div>
-                
-                <!-- Grilla de Tarjetas -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="grilla-servicios">
-                    <!-- Se llena con JavaScript -->
-                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="grilla-servicios"></div>
             </div>
         </main>
     </div>
 
-    <!-- MODAL PERFIL CONVERTIDOR -->
+    <!-- MODAL PERFIL & CONTRATACIÓN (ESCROW & CHAT INTERNO) -->
     <div id="modal-perfil" class="fixed inset-0 bg-[#202124]/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
         <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 flex flex-col max-h-[90vh]" id="modal-perfil-content">
-            
-            <div class="relative h-64 shrink-0 bg-gray-100">
+            <div class="relative h-48 shrink-0 bg-gray-100">
                 <img id="mp-foto-trabajo" src="" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 <button onclick="cerrarModal('modal-perfil')" class="absolute top-4 right-4 bg-white/20 hover:bg-white text-white hover:text-[#202124] w-10 h-10 rounded-full flex items-center justify-center transition backdrop-blur-md">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
-                <!-- Precio Base en la foto -->
-                <div class="absolute bottom-4 right-6 bg-white px-4 py-2 rounded-xl shadow-lg font-bold text-gray-900">
-                    <span class="text-xs text-gray-500 block uppercase tracking-wide">Visita desde</span>
-                    <span id="mp-precio" class="text-xl"></span>
-                </div>
             </div>
-
-            <div class="px-8 pb-8 pt-4 relative flex-1 overflow-y-auto">
-                <div class="absolute -top-16 left-8 w-28 h-28 rounded-full border-4 border-white overflow-hidden shadow-xl bg-white">
+            <div class="px-8 pb-6 pt-4 relative flex-1 overflow-y-auto">
+                <div class="absolute -top-14 left-8 w-24 h-24 rounded-full border-4 border-white overflow-hidden shadow-xl bg-white">
                     <img id="mp-foto-perfil" src="" class="w-full h-full object-cover">
                 </div>
-                
-                <div class="mt-14 flex justify-between items-start">
+                <div class="mt-12 flex justify-between items-start">
                     <div>
-                        <h2 id="mp-nombre" class="text-3xl font-extrabold text-[#202124] flex items-center gap-2"></h2>
-                        <p id="mp-oficio" class="text-[#35D07F] font-bold text-lg mb-1"></p>
-                        <p class="text-gray-500 text-sm font-medium"><i class="fa-solid fa-location-dot mr-1"></i> <span id="mp-ubicacion"></span></p>
+                        <h2 id="mp-nombre" class="text-2xl font-extrabold text-[#202124] flex items-center gap-2"></h2>
+                        <p id="mp-oficio" class="text-[#35D07F] font-bold text-base mb-1"></p>
+                        <p class="text-gray-500 text-xs font-medium"><i class="fa-solid fa-location-dot mr-1"></i> <span id="mp-ubicacion"></span></p>
                     </div>
                     <div class="text-right">
-                        <div class="flex items-center gap-1 bg-yellow-50 text-yellow-700 px-3 py-1 rounded-lg font-bold text-lg border border-yellow-100">
-                            <i class="fa-solid fa-star text-yellow-400"></i> <span id="mp-rating"></span>
-                        </div>
-                        <p class="text-xs text-gray-400 mt-1">120 opiniones</p>
+                        <span id="mp-precio" class="text-xl font-extrabold text-gray-900"></span>
+                        <p class="text-[10px] text-gray-400 uppercase font-bold">Incluye retención 8% Escrow</p>
                     </div>
                 </div>
-
-                <div class="mt-8">
-                    <h3 class="font-bold text-gray-900 mb-2 text-lg">Sobre el servicio</h3>
-                    <p id="mp-descripcion" class="text-gray-600 leading-relaxed"></p>
+                <div class="mt-6">
+                    <h3 class="font-bold text-gray-900 mb-1 text-sm">Descripción</h3>
+                    <p id="mp-descripcion" class="text-gray-600 text-sm leading-relaxed"></p>
                 </div>
 
-                <div class="mt-6 flex flex-wrap gap-2">
-                    <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1.5 rounded-lg border border-gray-200"><i class="fa-regular fa-credit-card"></i> Acepta Débito</span>
-                    <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1.5 rounded-lg border border-gray-200"><i class="fa-solid fa-mobile-screen"></i> Billeteras Virtuales</span>
+                <!-- Simulación de Chat Interno Obligatorio -->
+                <div class="mt-6 border border-gray-200 rounded-2xl p-4 bg-gray-50">
+                    <h4 class="font-bold text-xs text-gray-700 uppercase mb-2"><i class="fa-solid fa-lock text-[#35D07F] mr-1"></i> Chat Interno Obligatorio (Anti-fugas)</h4>
+                    <div class="bg-white h-28 rounded-xl border border-gray-200 p-3 mb-2 overflow-y-auto text-xs space-y-2" id="caja-chat">
+                        <p class="text-gray-400 italic">Iniciá conversación interna con el prestador. No compartas números de teléfono o serás suspendido.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <input type="text" id="input-chat" placeholder="Escribí tu consulta..." class="flex-1 border border-gray-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-[#35D07F]">
+                        <button onclick="enviarMensajeChat()" class="bg-[#202124] text-white px-4 py-2 rounded-xl text-xs font-bold">Enviar</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Botonera fija inferior (CTA) -->
-            <div class="p-6 bg-gray-50 border-t border-gray-200 shrink-0 flex gap-4">
-                <button class="w-full bg-[#35D07F] hover:bg-[#2bc472] text-[#202124] font-extrabold py-4 rounded-xl shadow-lg shadow-[#35D07F]/30 transition text-lg flex justify-center items-center gap-2">
-                    Contratar Servicio
+            <!-- Botón de Contratación con Garantía Escrow -->
+            <div class="p-5 bg-gray-50 border-t border-gray-200 shrink-0 flex gap-4">
+                <button onclick="iniciarContratacionEscrow()" class="w-full bg-[#35D07F] hover:bg-[#2bc472] text-[#202124] font-extrabold py-3.5 rounded-xl shadow-md transition text-sm flex justify-center items-center gap-2">
+                    <i class="fa-solid fa-shield-halved"></i> Pagar y Contratar (Fondos Asegurados 8%)
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- SCRIPTS -->
+    <!-- MODAL VERIFICACIÓN DE IDENTIDAD -->
+    <div id="modal-verificacion" class="fixed inset-0 bg-[#202124]/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-lg">Validación de Identidad Obligatoria</h3>
+                <button onclick="cerrarModal('modal-verificacion')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <p class="text-xs text-gray-500 mb-4">Para operar en NUVEX como prestador, subí tu DNI y Matrícula profesional.</p>
+            <div class="space-y-3">
+                <input type="file" class="w-full text-xs border border-gray-200 p-2 rounded-xl">
+                <button onclick="alert('Documentos enviados a revisión de administrador.'); cerrarModal('modal-verificacion');" class="w-full bg-[#202124] text-[#35D07F] font-bold py-3 rounded-xl text-xs">Enviar a Validar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS CON LA LÓGICA INTEGRADA -->
     <script>
         const servicios = [
             {
@@ -202,136 +159,104 @@
                 oficio: "Especialista en Instalaciones",
                 categoria: "Electricista",
                 rating: "5.0",
-                ubicacion: "Corrientes, Capital",
+                ubicacion: "Corrientes, Argentina",
                 precio: "$15.000",
-                descripcion: "Técnico especialista. Resolución de urgencias 24hs, tableros y recableado. Presupuesto formal. Acepto transferencias por Ualá y Claro Pay.",
+                descripcion: "Técnico especialista verificado. Tableros y recableado de confianza.",
                 fotoTrabajo: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=500&q=80",
                 fotoPerfil: "https://ui-avatars.com/api/?name=Maxi+Pipet&background=202124&color=35D07F",
-                destacado: true,
-                online: true
+                destacado: true
             },
             {
                 id: 2,
-                nombre: "Construcciones Sur",
+                nombre: "Dra. Laura Gómez",
                 verificado: true,
-                oficio: "Remodelaciones Generales",
-                categoria: "Albañil",
-                rating: "4.8",
-                ubicacion: "Corrientes, Centro",
-                precio: "$25.000",
-                descripcion: "Empresa constructora. Hacemos pintura, durlock, colocación de pisos. Personal asegurado. Financiamos con GO Cuotas.",
-                fotoTrabajo: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=500&q=80",
-                fotoPerfil: "https://randomuser.me/api/portraits/men/22.jpg",
-                destacado: false,
-                online: false
-            },
-            {
-                id: 3,
-                nombre: "Sanitarios Martínez",
-                verificado: false,
-                oficio: "Plomería y Gas",
-                categoria: "Plomero",
-                rating: "4.5",
-                ubicacion: "Corrientes, Barrio Sur",
-                precio: "$12.000",
-                descripcion: "Gasista matriculado y plomero. Destapes con máquina. Instalación de termotanques y cocinas.",
-                fotoTrabajo: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=500&q=80",
-                fotoPerfil: "https://randomuser.me/api/portraits/men/45.jpg",
-                destacado: false,
-                online: true
+                oficio: "Médica Pediatra",
+                categoria: "Médico",
+                rating: "5.0",
+                ubicacion: "Buenos Aires, Argentina",
+                precio: "$20.000",
+                descripcion: "Atención médica particular matriculada a domicilio.",
+                fotoTrabajo: "https://images.unsplash.com/photo-1574359411659-15573a27fd0c?auto=format&fit=crop&w=500&q=80",
+                fotoPerfil: "https://randomuser.me/api/portraits/women/44.jpg",
+                destacado: false
             }
         ];
 
-        const contenedorGrilla = document.getElementById('grilla-servicios');
-
         function renderizarTarjetas(datos) {
-            contenedorGrilla.innerHTML = ''; 
-            if(datos.length === 0) {
-                contenedorGrilla.innerHTML = '<p class="text-gray-500 font-medium col-span-full">No hay resultados para esta búsqueda.</p>';
-                return;
-            }
-            
+            const grilla = document.getElementById('grilla-servicios');
+            grilla.innerHTML = '';
             datos.forEach(srv => {
-                const badgeDestacado = srv.destacado ? `<div class="absolute top-3 left-3 bg-[#202124] text-white text-[10px] font-bold px-2.5 py-1 rounded-md shadow-lg z-10 tracking-wider">PATROCINADO</div>` : '';
-                const iconoVerificado = srv.verificado ? `<i class="fa-solid fa-circle-check text-blue-500 text-sm ml-1" title="Perfil Verificado"></i>` : '';
-                const puntoOnline = srv.online ? `<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></div>` : '';
-
-                const tarjeta = document.createElement('div');
-                tarjeta.className = "bg-white rounded-2xl overflow-hidden border border-gray-100 cursor-pointer group card-hover shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col";
-                tarjeta.onclick = () => abrirPerfil(srv.id); 
-                
-                tarjeta.innerHTML = `
-                    <div class="h-44 overflow-hidden relative bg-gray-100">
-                        ${badgeDestacado}
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl overflow-hidden border border-gray-100 cursor-pointer group card-hover shadow-sm flex flex-col";
+                card.onclick = () => abrirPerfil(srv.id);
+                card.innerHTML = `
+                    <div class="h-40 overflow-hidden relative bg-gray-100">
                         <img src="${srv.fotoTrabajo}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
-                        <div class="absolute -bottom-5 right-5 w-14 h-14 rounded-full border-[3px] border-white overflow-hidden shadow-md bg-white">
+                        <div class="absolute -bottom-4 right-4 w-12 h-12 rounded-full border-2 border-white overflow-hidden shadow bg-white">
                             <img src="${srv.fotoPerfil}" class="w-full h-full object-cover">
-                            ${puntoOnline}
                         </div>
                     </div>
-                    <div class="p-5 pt-6 flex-1 flex flex-col">
-                        <div class="flex justify-between items-start mb-0.5">
-                            <h3 class="font-extrabold text-lg text-[#202124] leading-tight flex items-center">${srv.nombre} ${iconoVerificado}</h3>
-                            <div class="flex items-center text-sm font-bold text-gray-700 bg-gray-50 px-1.5 py-0.5 rounded"><i class="fa-solid fa-star text-yellow-400 text-xs mr-1"></i> ${srv.rating}</div>
-                        </div>
-                        <p class="text-sm font-bold text-[#35D07F] mb-3">${srv.oficio}</p>
-                        
-                        <p class="text-xs text-gray-500 mb-4 font-medium flex items-center gap-1.5"><i class="fa-solid fa-location-dot"></i> ${srv.ubicacion}</p>
-                        
-                        <div class="mt-auto border-t border-gray-100 pt-4 flex items-center justify-between">
-                            <div>
-                                <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Costo base</p>
-                                <p class="font-extrabold text-gray-900 text-lg">${srv.precio}</p>
-                            </div>
-                            <button class="bg-gray-100 group-hover:bg-[#35D07F] group-hover:text-[#202124] text-gray-600 font-bold w-10 h-10 rounded-xl transition duration-300 flex items-center justify-center">
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
+                    <div class="p-4 pt-5 flex-1 flex flex-col">
+                        <h3 class="font-extrabold text-base text-[#202124] flex items-center">${srv.nombre} <i class="fa-solid fa-circle-check text-blue-500 text-xs ml-1"></i></h3>
+                        <p class="text-xs font-bold text-[#35D07F] mb-2">${srv.oficio}</p>
+                        <p class="text-[11px] text-gray-400 mb-3"><i class="fa-solid fa-location-dot"></i> ${srv.ubicacion}</p>
+                        <div class="mt-auto border-t border-gray-100 pt-3 flex items-center justify-between">
+                            <span class="font-extrabold text-gray-900 text-sm">${srv.precio}</span>
+                            <span class="text-xs font-bold bg-gray-100 px-3 py-1.5 rounded-xl">Contratar</span>
                         </div>
                     </div>
                 `;
-                contenedorGrilla.appendChild(tarjeta);
+                grilla.appendChild(card);
             });
         }
-
         renderizarTarjetas(servicios);
-
-        function buscarServicios() {
-            const txt = document.getElementById('buscador').value.toLowerCase();
-            const res = servicios.filter(s => s.oficio.toLowerCase().includes(txt) || s.categoria.toLowerCase().includes(txt) || s.nombre.toLowerCase().includes(txt));
-            document.getElementById('titulo-resultados').innerText = txt === '' ? 'Recomendados para vos' : 'Resultados de búsqueda';
-            renderizarTarjetas(res);
-        }
 
         function filtrarCategoria(cat) {
             if(cat === 'Todos') renderizarTarjetas(servicios);
             else renderizarTarjetas(servicios.filter(s => s.categoria === cat));
-            document.getElementById('titulo-resultados').innerText = cat === 'Todos' ? 'Recomendados para vos' : `Resultados: ${cat}`;
         }
 
         function abrirPerfil(id) {
             const srv = servicios.find(s => s.id === id);
-            const iconoVerificado = srv.verificado ? `<i class="fa-solid fa-circle-check text-blue-500 text-2xl ml-2" title="Perfil Verificado"></i>` : '';
-            
             document.getElementById('mp-foto-trabajo').src = srv.fotoTrabajo;
             document.getElementById('mp-foto-perfil').src = srv.fotoPerfil;
-            document.getElementById('mp-nombre').innerHTML = `${srv.nombre} ${iconoVerificado}`;
-            document.getElementById('mp-rating').innerText = srv.rating;
+            document.getElementById('mp-nombre').innerHTML = `${srv.nombre} <i class="fa-solid fa-circle-check text-blue-500 text-lg"></i>`;
             document.getElementById('mp-oficio').innerText = srv.oficio;
             document.getElementById('mp-ubicacion').innerText = srv.ubicacion;
             document.getElementById('mp-precio').innerText = srv.precio;
             document.getElementById('mp-descripcion').innerText = srv.descripcion;
-
+            
             const modal = document.getElementById('modal-perfil');
-            const content = document.getElementById('modal-perfil-content');
             modal.classList.remove('hidden');
-            setTimeout(() => { modal.classList.remove('opacity-0'); content.classList.remove('scale-95'); }, 10);
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
         }
 
-        function cerrarModal(idModal) {
-            const modal = document.getElementById(idModal);
-            const content = document.getElementById(`${idModal}-content`);
-            modal.classList.add('opacity-0'); content.classList.add('scale-95');
-            setTimeout(() => modal.classList.add('hidden'), 300);
+        function cerrarModal(id) { document.getElementById(id).classList.add('hidden'); }
+        function abrirModalVerificacion() { document.getElementById('modal-verificacion').classList.remove('hidden'); }
+
+        // Lógica de seguridad del Chat Interno contra números de teléfono
+        function enviarMensajeChat() {
+            const input = document.getElementById('input-chat');
+            const caja = document.getElementById('caja-chat');
+            const texto = input.value;
+            if(!texto) return;
+
+            // Detección automática de números de teléfono o intentos de fuga
+            const regexTelefono = /(\d{8,}|whatsapp|tel|contacto|cbu)/i;
+            if(regexTelefono.test(texto)) {
+                alert('⚠️ Advertencia NUVEX: Por seguridad y términos de la plataforma, está prohibido compartir datos de contacto externos. Su mensaje ha sido bloqueado.');
+                input.value = '';
+                return;
+            }
+
+            caja.innerHTML += `<p class="text-gray-800"><b>Tú:</b> ${texto}</p>`;
+            input.value = '';
+            caja.scrollTop = caja.scrollHeight;
+        }
+
+        function iniciarContratacionEscrow() {
+            alert('🔒 Pago asegurado en cuenta de garantía (Escrow). NUVEX ha retenido el 8% de comisión de forma automática y los fondos restantes se liberarán al completar el trabajo.');
+            cerrarModal('modal-perfil');
         }
     </script>
 </body>
